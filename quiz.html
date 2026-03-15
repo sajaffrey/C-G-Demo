@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crumbs & Giggles</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <nav>
+        <span>crumbs & giggles</span>
+        <a href="index.html">Home</a>
+    </nav>
+
+    <div id="quiz-container">
+
+        <div id="quiz-header">
+            <button id="back-btn">← Back</button>
+            <span id="question-counter">Question 1 of 5</span>
+            <button id="skip-btn">Skip</button>
+        </div>
+
+        <div id="progress-bar-container">
+            <div id="progress-fill" style="width:20%"></div>
+        </div>
+
+        <!-- Question 1 -->
+        <div id="question-1">
+            <p>☀️</p>
+            <h2>It's Saturday morning. What's your vibe?</h2>
+            <div class="answer-card" data-value="adventure">🏃 Early rise & adventure!</div>
+            <div class="answer-card" data-value="cozy">📚 Cozy in bed with a book</div>
+            <div class="answer-card" data-value="social">🥞 Brunch with friends</div>
+            <div class="answer-card" data-value="creative">👨🍳 Baking something new</div>
+        </div>
+
+        <!-- Question 2 -->
+        <div id="question-2" style="display:none">
+            <p>✨</p>
+            <h2>Pick your ideal flavor combo</h2>
+            <div class="answer-card" data-value="sweet-salty">🧂 Sweet & salty</div>
+            <div class="answer-card" data-value="chocolatey">🍫 Rich & chocolatey</div>
+            <div class="answer-card" data-value="classic">🥛 Classic & comforting</div>
+            <div class="answer-card" data-value="unique">🌟 Unique & surprising</div>
+        </div>
+
+        <!-- Question 3 -->
+        <div id="question-3" style="display:none">
+            <p>🤔</p>
+            <h2>Your perfect cookie texture?</h2>
+            <div class="answer-card" data-value="chewy">☁️ Soft & chewy</div>
+            <div class="answer-card" data-value="crunchy">⚡ Crispy & crunchy</div>
+            <div class="answer-card" data-value="gooey">🌙 Gooey center</div>
+            <div class="answer-card" data-value="balanced">⚖️ Perfectly balanced</div>
+        </div>
+
+        <!-- Question 4 -->
+        <div id="question-4" style="display:none">
+            <p>🎉</p>
+            <h2>How do you like to celebrate?</h2>
+            <div class="answer-card" data-value="party">🎈 Big party with everyone</div>
+            <div class="answer-card" data-value="intimate">🕯️ Intimate dinner</div>
+            <div class="answer-card" data-value="spontaneous">🎪 Spontaneous adventure</div>
+            <div class="answer-card" data-value="solo">💝 Treat myself</div>
+        </div>
+
+        <!-- Question 5 -->
+        <div id="question-5" style="display:none">
+            <p>☕</p>
+            <h2>Your go-to beverage?</h2>
+            <div class="answer-card" data-value="coffee">☕ Classic coffee</div>
+            <div class="answer-card" data-value="fancylatte">🎨 Fancy latte</div>
+            <div class="answer-card" data-value="milk">🥛 Cold milk</div>
+            <div class="answer-card" data-value="unique-drink">🧋 Something unique</div>
+        </div>
+
+        <p>✦ Your perfect cookie is waiting!</p>
+
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
