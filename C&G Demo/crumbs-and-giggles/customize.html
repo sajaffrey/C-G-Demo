@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crumbs & Giggles</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <nav>
+        <span>crumbs & giggles</span>
+        <a href="index.html">Home</a>
+    </nav>
+
+    <div id="customize-container">
+        <h1>Customize Your Cookie</h1>
+
+        <div id="dietary-section">
+            <h3>Dietary Preferences</h3>
+            <div><label>Gluten-Free <input type="checkbox" id="toggle-gluten"></label></div>
+            <div><label>Nut-Free <input type="checkbox" id="toggle-nut"></label></div>
+            <div><label>Vegan <input type="checkbox" id="toggle-vegan"></label></div>
+            <div><label>Sugar-Free <input type="checkbox" id="toggle-sugar"></label></div>
+        </div>
+
+        <div id="sweetness-section">
+            <h3>Sweetness Level</h3>
+            <input type="range" id="sweetness-slider" min="1" max="3" value="2">
+            <div>
+                <span>Lightly Sweet</span>
+                <span>Just Right</span>
+                <span>Extra Sweet</span>
+            </div>
+        </div>
+
+        <div id="toppings-section">
+            <h3>Choose Your Toppings</h3>
+            <div class="topping-card" data-topping="chocolate-chips">🍫 Chocolate Chips</div>
+            <div class="topping-card" data-topping="sprinkles">🌈 Rainbow Sprinkles</div>
+            <div class="topping-card" data-topping="sea-salt">🧂 Sea Salt</div>
+            <div class="topping-card" data-topping="caramel">🍬 Caramel Drizzle</div>
+            <div class="topping-card" data-topping="pretzel">🥨 Crushed Pretzel</div>
+            <div class="topping-card" data-topping="coconut">🥥 Coconut Flakes</div>
+            <div class="topping-card" data-topping="matcha">🍵 Matcha Powder</div>
+            <div class="topping-card" data-topping="peanut-butter">🥜 Peanut Butter Chips</div>
+        </div>
+
+        <button id="confirm-btn">Confirm My Cookie 🍪</button>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
