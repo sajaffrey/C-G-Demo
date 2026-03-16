@@ -3,826 +3,71 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Crumbs &amp; Giggles — Discover Artisan Cookies</title>
-  <meta name="description" content="Browse and discover handcrafted artisan cookies from local bakeries. Filter by Classic, Unique, or Bestseller and find your perfect cookie.">
+  <title>Crumbs &amp; Giggles</title>
   <link rel="stylesheet" href="css/style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-  <style>
-    /* ── Page-level overrides for the Browse layout ── */
-    body {
-      background-color: var(--color-background);
-      color: var(--color-text-dark);
-    }
-
-    /* ── Navbar ── */
-    .nav-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 1.5rem;
-      background-color: var(--color-card-bg);
-      box-shadow: 0 2px 12px rgba(86, 38, 34, 0.08);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      text-decoration: none;
-    }
-
-    .nav-logo img {
-      height: 42px;
-      width: auto;
-    }
-
-    .nav-logo-text {
-      font-family: "Playfair Display", serif;
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--color-primary);
-      letter-spacing: -0.3px;
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .nav-icon-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0.45rem;
-      border-radius: 50%;
-      color: var(--color-primary);
-      font-size: 1.3rem;
-      line-height: 1;
-      transition: background-color 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0;
-    }
-
-    .nav-icon-btn:hover {
-      background-color: var(--color-cta);
-      transform: none;
-    }
-
-    /* ── Browse Page Shell ── */
-    .browse-page {
-      max-width: 480px;
-      margin: 0 auto;
-      padding: 1.5rem 1rem 4rem;
-    }
-
-    /* ── Page Heading ── */
-    .browse-heading {
-      font-family: "Playfair Display", serif;
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--color-primary);
-      text-align: center;
-      margin-bottom: 1.25rem;
-      line-height: 1.2;
-    }
-
-    /* ── Filter Pill Bar ── */
-    .filter-bar {
-      display: flex;
-      gap: 0.5rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 1.5rem;
-    }
-
-    .filter-pill {
-      border: 2px solid var(--color-primary);
-      background: transparent;
-      color: var(--color-primary);
-      font-family: "Outfit", sans-serif;
-      font-size: 0.85rem;
-      font-weight: 600;
-      padding: 0.4rem 1.1rem;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: background-color 0.2s, color 0.2s, transform 0.15s;
-      margin: 0;
-    }
-
-    .filter-pill:hover {
-      background-color: var(--color-cta);
-      color: var(--color-primary);
-      transform: translateY(-1px);
-    }
-
-    .filter-pill.active {
-      background-color: var(--color-primary);
-      color: #fff;
-    }
-
-    .filter-pill.active:hover {
-      background-color: var(--color-primary);
-      color: #fff;
-    }
-
-    /* ── Cookie Card List ── */
-    .cookie-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
-
-    /* ── Individual Cookie Card ── */
-    .cookie-card {
-      background: var(--color-card-bg);
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(86, 38, 34, 0.09);
-      transition: transform 0.25s, box-shadow 0.25s;
-      animation: fadeInUp 0.45s ease-out both;
-    }
-
-    .cookie-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 30px rgba(86, 38, 34, 0.14);
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .cookie-card:nth-child(1) { animation-delay: 0.05s; }
-    .cookie-card:nth-child(2) { animation-delay: 0.12s; }
-    .cookie-card:nth-child(3) { animation-delay: 0.19s; }
-    .cookie-card:nth-child(4) { animation-delay: 0.26s; }
-    .cookie-card:nth-child(5) { animation-delay: 0.33s; }
-
-    /* ── Card Image Area ── */
-    .card-img-wrap {
-      position: relative;
-      width: 100%;
-      height: 185px;
-      overflow: hidden;
-    }
-
-    .card-img-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.4s ease;
-    }
-
-    .cookie-card:hover .card-img-wrap img {
-      transform: scale(1.04);
-    }
-
-    /* Heart icon */
-    .heart-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: rgba(255,255,255,0.88);
-      border: none;
-      border-radius: 50%;
-      width: 34px;
-      height: 34px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      cursor: pointer;
-      margin: 0;
-      padding: 0;
-      transition: background-color 0.2s, transform 0.15s;
-      backdrop-filter: blur(4px);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-    }
-
-    .heart-btn:hover {
-      background-color: var(--color-cta);
-      transform: scale(1.15);
-    }
-
-    .heart-btn.liked {
-      color: #e0344a;
-    }
-
-    /* Gift badge */
-    .gift-badge {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      background: var(--color-primary);
-      color: #fff;
-      font-size: 0.68rem;
-      font-weight: 700;
-      padding: 0.25rem 0.6rem;
-      border-radius: 50px;
-      letter-spacing: 0.3px;
-    }
-
-    /* Match badge */
-    .match-badge {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background: var(--color-cta);
-      color: var(--color-primary);
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 0.28rem 0.65rem;
-      border-radius: 50px;
-      letter-spacing: 0.2px;
-      box-shadow: 0 2px 8px rgba(86,38,34,0.15);
-    }
-
-    /* ── Card Body ── */
-    .card-body {
-      padding: 1rem 1.1rem 1.1rem;
-    }
-
-    /* Name + Price row */
-    .card-title-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 0.35rem;
-    }
-
-    .card-name {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--color-text-dark);
-      line-height: 1.3;
-      flex: 1;
-      margin-right: 0.5rem;
-    }
-
-    .card-price {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--color-primary);
-      white-space: nowrap;
-    }
-
-    /* Bakery info row */
-    .card-bakery {
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-      font-size: 0.78rem;
-      color: var(--color-text-mid);
-      margin-bottom: 0.45rem;
-    }
-
-    .card-bakery .pin-icon {
-      font-size: 0.8rem;
-      flex-shrink: 0;
-    }
-
-    /* Rating row */
-    .card-rating {
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-      font-size: 0.82rem;
-      color: var(--color-text-dark);
-      font-weight: 600;
-      margin-bottom: 0.55rem;
-    }
-
-    .card-rating .star-icon {
-      color: #f5a623;
-      font-size: 0.9rem;
-    }
-
-    .card-rating .review-count {
-      color: var(--color-text-mid);
-      font-weight: 400;
-    }
-
-    /* Tag pills */
-    .card-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.35rem;
-      margin-bottom: 0.6rem;
-    }
-
-    .tag-pill {
-      border: 1.5px solid var(--color-border);
-      color: var(--color-text-mid);
-      font-size: 0.7rem;
-      font-weight: 600;
-      padding: 0.18rem 0.6rem;
-      border-radius: 50px;
-      background: transparent;
-    }
-
-    /* Delivery + allergen row */
-    .card-meta {
-      display: flex;
-      align-items: center;
-      gap: 0.45rem;
-      font-size: 0.74rem;
-      color: var(--color-text-mid);
-      margin-bottom: 0.85rem;
-      flex-wrap: wrap;
-    }
-
-    .card-meta .clock-icon {
-      font-size: 0.8rem;
-      flex-shrink: 0;
-    }
-
-    .meta-dot {
-      opacity: 0.5;
-    }
-
-    /* Add to Cart button */
-    .add-to-cart-btn {
-      display: block;
-      width: 100%;
-      background-color: var(--color-primary);
-      color: #fff;
-      font-family: "Outfit", sans-serif;
-      font-size: 0.92rem;
-      font-weight: 700;
-      padding: 0.75rem 1rem;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      text-align: center;
-      transition: background-color 0.2s, transform 0.15s;
-      letter-spacing: 0.2px;
-      margin: 0;
-    }
-
-    .add-to-cart-btn:hover {
-      background-color: #562622;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(86, 38, 34, 0.25);
-    }
-
-    .add-to-cart-btn:active {
-      transform: translateY(0);
-    }
-
-    /* ── Side Menu Overlay ── */
-    .menu-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(86, 38, 34, 0.35);
-      backdrop-filter: blur(3px);
-      -webkit-backdrop-filter: blur(3px);
-      z-index: 200;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-
-    .menu-overlay.open {
-      opacity: 1;
-      pointer-events: all;
-    }
-
-    /* ── Side Drawer ── */
-    .side-drawer {
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: min(82vw, 340px);
-      height: 100%;
-      background: var(--color-card-bg);
-      z-index: 201;
-      transform: translateX(100%);
-      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-      display: flex;
-      flex-direction: column;
-      box-shadow: -8px 0 40px rgba(86, 38, 34, 0.18);
-      border-radius: 20px 0 0 20px;
-      overflow: hidden;
-    }
-
-    .side-drawer.open {
-      transform: translateX(0);
-    }
-
-    /* Drawer header */
-    .drawer-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.25rem 1.25rem 1rem;
-      border-bottom: 1.5px solid var(--color-border);
-      background: var(--color-card-bg);
-    }
-
-    .drawer-title {
-      font-family: "Playfair Display", serif;
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--color-primary);
-      letter-spacing: -0.3px;
-    }
-
-    .drawer-close-btn {
-      background: var(--color-cta);
-      border: none;
-      border-radius: 50%;
-      width: 34px;
-      height: 34px;
-      font-size: 1.1rem;
-      color: var(--color-primary);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0;
-      padding: 0;
-      transition: background-color 0.2s, transform 0.15s;
-      flex-shrink: 0;
-      line-height: 1;
-    }
-
-    .drawer-close-btn:hover {
-      background-color: var(--color-cta-hover);
-      transform: rotate(90deg) scale(1.1);
-    }
-
-    /* Drawer nav list */
-    .drawer-nav {
-      list-style: none;
-      padding: 0.75rem 0;
-      margin: 0;
-      flex: 1;
-      overflow-y: auto;
-    }
-
-    .drawer-nav li {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.9rem 1.25rem;
-      cursor: pointer;
-      transition: background-color 0.18s;
-      border-radius: 12px;
-      margin: 0.1rem 0.6rem;
-    }
-
-    .drawer-nav li:hover {
-      background-color: var(--color-hint-bg);
-    }
-
-    .drawer-nav-left {
-      display: flex;
-      align-items: center;
-      gap: 0.85rem;
-    }
-
-    .drawer-nav-icon {
-      width: 36px;
-      height: 36px;
-      background: var(--color-hint-bg);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.05rem;
-      flex-shrink: 0;
-      transition: background-color 0.18s, transform 0.15s;
-    }
-
-    .drawer-nav li:hover .drawer-nav-icon {
-      background-color: var(--color-cta-hover);
-      transform: scale(1.08);
-    }
-
-    .drawer-nav-label {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--color-text-dark);
-    }
-
-    .drawer-nav-arrow {
-      color: var(--color-text-mid);
-      font-size: 1rem;
-      font-weight: 300;
-      transition: transform 0.18s;
-    }
-
-    .drawer-nav li:hover .drawer-nav-arrow {
-      transform: translateX(3px);
-    }
-
-    /* Staggered slide-in animation for menu items */
-    .side-drawer.open .drawer-nav li {
-      animation: slideInItem 0.3s ease-out both;
-    }
-    .side-drawer.open .drawer-nav li:nth-child(1) { animation-delay: 0.06s; }
-    .side-drawer.open .drawer-nav li:nth-child(2) { animation-delay: 0.10s; }
-    .side-drawer.open .drawer-nav li:nth-child(3) { animation-delay: 0.14s; }
-    .side-drawer.open .drawer-nav li:nth-child(4) { animation-delay: 0.18s; }
-    .side-drawer.open .drawer-nav li:nth-child(5) { animation-delay: 0.22s; }
-    .side-drawer.open .drawer-nav li:nth-child(6) { animation-delay: 0.26s; }
-    .side-drawer.open .drawer-nav li:nth-child(7) { animation-delay: 0.30s; }
-    .side-drawer.open .drawer-nav li:nth-child(8) { animation-delay: 0.34s; }
-
-    @keyframes slideInItem {
-      from { opacity: 0; transform: translateX(16px); }
-      to   { opacity: 1; transform: translateX(0); }
-    }
-
-    /* ──────────────────────────────────────────
-       POST-QUIZ HOME SCREEN
-    ────────────────────────────────────────── */
-    .match-page {
-      max-width: 480px;
-      margin: 0 auto;
-      padding: 2rem 1rem 6rem;
-      display: none; /* shown via JS */
-      animation: fadeInUp 0.45s ease-out both;
-    }
-
-    .match-page.visible {
-      display: block;
-    }
-
-    .match-heading {
-      font-family: "Playfair Display", serif;
-      font-size: 1.9rem;
-      font-weight: 700;
-      color: var(--color-primary);
-      text-align: center;
-      margin-bottom: 0.4rem;
-      line-height: 1.2;
-    }
-
-    .match-subheading {
-      font-size: 1rem;
-      color: var(--color-text-mid);
-      text-align: center;
-      margin-bottom: 1.75rem;
-      font-weight: 400;
-    }
-
-    /* Match card */
-    .match-card {
-      background: var(--color-card-bg);
-      border-radius: 24px;
-      padding: 1.75rem 1.5rem 1.5rem;
-      box-shadow: 0 6px 28px rgba(86, 38, 34, 0.10);
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-
-    .match-card-title {
-      font-size: 0.8rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--color-text-mid);
-      margin-bottom: 0.5rem;
-    }
-
-    .match-personality-label {
-      font-size: 1rem;
-      color: var(--color-text-mid);
-      margin-bottom: 1.25rem;
-    }
-
-    /* Cookie avatar */
-    .match-cookie-avatar {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin: 0 auto 1.1rem;
-      display: block;
-      border: 3px solid var(--color-cta);
-      box-shadow: 0 4px 16px rgba(86, 38, 34, 0.13);
-    }
-
-    .match-cookie-avatar-emoji {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      background: var(--color-hint-bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.6rem;
-      margin: 0 auto 1.1rem;
-      border: 3px solid var(--color-cta);
-    }
-
-    .match-cookie-name {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--color-cta-hover);
-      margin-bottom: 1.4rem;
-    }
-
-    .find-cookie-btn {
-      display: block;
-      width: 100%;
-      background-color: var(--color-primary);
-      color: #fff;
-      font-family: "Outfit", sans-serif;
-      font-size: 0.95rem;
-      font-weight: 700;
-      padding: 0.8rem 1rem;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: background-color 0.2s, transform 0.15s;
-      margin: 0;
-    }
-
-    .find-cookie-btn:hover {
-      background-color: #3e1917;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(86, 38, 34, 0.25);
-    }
-
-    /* Browse All button */
-    .browse-all-btn {
-      display: block;
-      width: 100%;
-      background: transparent;
-      color: var(--color-primary);
-      font-family: "Outfit", sans-serif;
-      font-size: 0.95rem;
-      font-weight: 700;
-      padding: 0.8rem 1rem;
-      border: 2px solid var(--color-cta);
-      border-radius: 50px;
-      cursor: pointer;
-      transition: background-color 0.2s, transform 0.15s;
-      margin: 0;
-      text-align: center;
-    }
-
-    .browse-all-btn:hover {
-      background-color: var(--color-hint-bg);
-      transform: translateY(-2px);
-    }
-
-    /* ──────────────────────────────────────────
-       BOTTOM NAV BAR
-    ────────────────────────────────────────── */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: var(--color-card-bg);
-      border-top: 1.5px solid var(--color-border);
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      padding: 0.6rem 0 calc(0.6rem + env(safe-area-inset-bottom, 0px));
-      z-index: 99;
-      box-shadow: 0 -4px 20px rgba(86, 38, 34, 0.07);
-    }
-
-    .bottom-nav-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.2rem;
-      font-size: 1.3rem;
-      color: var(--color-text-mid);
-      padding: 0.3rem 1rem;
-      border-radius: 12px;
-      transition: color 0.18s, background-color 0.18s;
-      margin: 0;
-    }
-
-    .bottom-nav-btn span.btn-label {
-      font-size: 0.62rem;
-      font-weight: 600;
-      color: var(--color-text-mid);
-      letter-spacing: 0.3px;
-    }
-
-    .bottom-nav-btn:hover {
-      background-color: var(--color-hint-bg);
-      transform: none;
-    }
-
-    .bottom-nav-btn.active {
-      color: var(--color-primary);
-    }
-
-    .bottom-nav-btn.active span.btn-label {
-      color: var(--color-primary);
-    }
-
-    /* Center heart button */
-    .bottom-nav-center {
-      width: 52px;
-      height: 52px;
-      background: var(--color-cta);
-      border-radius: 50%;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      margin: 0;
-      margin-top: -18px;
-      box-shadow: 0 4px 16px rgba(86, 38, 34, 0.2);
-      transition: background-color 0.2s, transform 0.15s;
-      padding: 0;
-    }
-
-    .bottom-nav-center:hover {
-      background-color: var(--color-cta-hover);
-      transform: scale(1.08) translateY(-2px);
-    }
-
-    .bottom-nav-center.active {
-      background-color: var(--color-primary);
-    }
-  </style>
 </head>
 <body>
 
-  <!-- ── Side Menu Overlay ── -->
+  <!-- Side Menu Overlay -->
   <div class="menu-overlay" id="menu-overlay" aria-hidden="true"></div>
 
-  <!-- ── Side Drawer ── -->
+  <!-- Side Drawer -->
   <aside class="side-drawer" id="side-drawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
     <div class="drawer-header">
       <button class="drawer-close-btn" id="drawer-close-btn" aria-label="Close menu">✕</button>
       <span class="drawer-title">crumbs &amp; giggles</span>
     </div>
-    <ul class="drawer-nav" id="drawer-nav">
-      <li role="button" tabindex="0">
+    <ul class="drawer-nav">
+      <li onclick="location.href='index.html'">
         <div class="drawer-nav-left">
-          <span class="drawer-nav-icon">🔍</span>
-          <span class="drawer-nav-label">Discovery</span>
+          <span class="drawer-nav-icon">🏠</span>
+          <span class="drawer-nav-label">Home</span>
         </div>
         <span class="drawer-nav-arrow">›</span>
       </li>
-      <li role="button" tabindex="0">
+      <li onclick="location.href='quiz.html'">
+        <div class="drawer-nav-left">
+          <span class="drawer-nav-icon">🎯</span>
+          <span class="drawer-nav-label">Cookie Quiz</span>
+        </div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+      <li onclick="location.href='customize.html'">
         <div class="drawer-nav-left">
           <span class="drawer-nav-icon">🍪</span>
-          <span class="drawer-nav-label">Create Your Own</span>
+          <span class="drawer-nav-label">Customize</span>
         </div>
         <span class="drawer-nav-arrow">›</span>
       </li>
-      <li role="button" tabindex="0">
-        <div class="drawer-nav-left">
-          <span class="drawer-nav-icon">💬</span>
-          <span class="drawer-nav-label">Messages</span>
-        </div>
-        <span class="drawer-nav-arrow">›</span>
-      </li>
-      <li role="button" tabindex="0">
-        <div class="drawer-nav-left">
-          <span class="drawer-nav-icon">🎁</span>
-          <span class="drawer-nav-label">Rewards &amp; Loyalty</span>
-        </div>
-        <span class="drawer-nav-arrow">›</span>
-      </li>
-      <li role="button" tabindex="0">
+      <li onclick="location.href='order.html'">
         <div class="drawer-nav-left">
           <span class="drawer-nav-icon">📦</span>
           <span class="drawer-nav-label">My Orders</span>
         </div>
         <span class="drawer-nav-arrow">›</span>
       </li>
-      <li role="button" tabindex="0">
+      <li>
+        <div class="drawer-nav-left">
+          <span class="drawer-nav-icon">🎁</span>
+          <span class="drawer-nav-label">Rewards &amp; Loyalty</span>
+        </div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+      <li>
         <div class="drawer-nav-left">
           <span class="drawer-nav-icon">👤</span>
           <span class="drawer-nav-label">Profile</span>
         </div>
         <span class="drawer-nav-arrow">›</span>
       </li>
-      <li role="button" tabindex="0">
+      <li>
         <div class="drawer-nav-left">
           <span class="drawer-nav-icon">⚙️</span>
           <span class="drawer-nav-label">Settings</span>
         </div>
         <span class="drawer-nav-arrow">›</span>
       </li>
-      <li role="button" tabindex="0">
+      <li>
         <div class="drawer-nav-left">
           <span class="drawer-nav-icon">⭐</span>
           <span class="drawer-nav-label">Reviews</span>
@@ -832,310 +77,62 @@
     </ul>
   </aside>
 
-  <!-- ── Navbar ── -->
+  <!-- Navbar -->
   <nav class="nav-inner">
     <a href="index.html" class="nav-logo" aria-label="Crumbs &amp; Giggles home">
       <img src="assets/images/Logos png-02.png" alt="Crumbs &amp; Giggles logo">
-      <span class="nav-logo-text">crumbs &amp; giggles</span>
     </a>
     <div class="nav-actions">
-      <button class="nav-icon-btn" id="search-btn" aria-label="Search cookies">🔍</button>
+      <button class="nav-icon-btn" aria-label="Search">🔍</button>
       <button class="nav-icon-btn" id="menu-btn" aria-label="Open menu">☰</button>
     </div>
   </nav>
 
-  <!-- ── Browse Page ── -->
-  <div class="browse-page">
+  <!-- Home Page Main Content -->
+  <main class="home-page">
 
-    <h1 class="browse-heading">Discover Artisan Cookies</h1>
-
-    <!-- Filter Pill Bar -->
-    <div class="filter-bar" role="group" aria-label="Filter cookies by category">
-      <button class="filter-pill active" id="filter-all"        data-filter="all">All</button>
-      <button class="filter-pill"        id="filter-classic"    data-filter="Classic">Classic</button>
-      <button class="filter-pill"        id="filter-unique"     data-filter="Unique">Unique</button>
-      <button class="filter-pill"        id="filter-bestseller" data-filter="Bestseller">Bestseller</button>
-    </div>
-
-    <!-- Cookie Card List -->
-    <div class="cookie-list" id="cookie-list">
-
-      <!-- Card 1 — Original Chocolate Chip -->
-      <article class="cookie-card" data-tags="Classic,Bestseller,Artisan">
-        <div class="card-img-wrap">
-          <img src="assets/images/Chocolate-Chip-Cookies.jpg" alt="Original Chocolate Chip cookie" loading="lazy">
-          <button class="heart-btn" aria-label="Save to favourites">🤍</button>
-          <span class="gift-badge">🎁 Gift Option</span>
-        </div>
-        <div class="card-body">
-          <div class="card-title-row">
-            <span class="card-name">Original Chocolate Chip</span>
-            <span class="card-price">$3.50</span>
-          </div>
-          <div class="card-bakery">
-            <span class="pin-icon">📍</span>
-            Sweet Dreams Bakery · Downtown
-          </div>
-          <div class="card-rating">
-            <span class="star-icon">⭐</span>
-            4.9 <span class="review-count">(127 reviews)</span>
-          </div>
-          <div class="card-tags">
-            <span class="tag-pill">Classic</span>
-            <span class="tag-pill">Bestseller</span>
-            <span class="tag-pill">Artisan</span>
-          </div>
-          <div class="card-meta">
-            <span class="clock-icon">🕐</span>
-            30–45 min
-            <span class="meta-dot">·</span>
-            Contains: Gluten, Dairy, Eggs
-          </div>
-          <button class="add-to-cart-btn" id="cart-btn-1">🛒 Add to Cart</button>
-        </div>
-      </article>
-
-      <!-- Card 2 — Sugar Cookie Variety Pack -->
-      <article class="cookie-card" data-tags="Colorful,Party,Gift-Ready">
-        <div class="card-img-wrap">
-          <img src="assets/images/sugar_cookie_pack.png" alt="Sugar Cookie Variety Pack" loading="lazy">
-          <button class="heart-btn" aria-label="Save to favourites">🤍</button>
-          <span class="gift-badge">🎁 Gift Option</span>
-        </div>
-        <div class="card-body">
-          <div class="card-title-row">
-            <span class="card-name">Sugar Cookie Variety Pack</span>
-            <span class="card-price">$18.00</span>
-          </div>
-          <div class="card-bakery">
-            <span class="pin-icon">📍</span>
-            Rainbow Treats Co. · Midtown
-          </div>
-          <div class="card-rating">
-            <span class="star-icon">⭐</span>
-            4.8 <span class="review-count">(89 reviews)</span>
-          </div>
-          <div class="card-tags">
-            <span class="tag-pill">Colorful</span>
-            <span class="tag-pill">Party</span>
-            <span class="tag-pill">Gift-Ready</span>
-          </div>
-          <div class="card-meta">
-            <span class="clock-icon">🕐</span>
-            45–60 min
-            <span class="meta-dot">·</span>
-            Contains: Gluten, Dairy
-          </div>
-          <button class="add-to-cart-btn" id="cart-btn-2">🛒 Add to Cart</button>
-        </div>
-      </article>
-
-      <!-- Card 3 — Triple Chocolate Fudge -->
-      <article class="cookie-card" data-tags="Indulgent,Rich,Premium">
-        <div class="card-img-wrap">
-          <img src="assets/images/triple-chocolate-chunk-cookies-7189-500x500.jpg" alt="Triple Chocolate Fudge cookie" loading="lazy">
-          <button class="heart-btn" aria-label="Save to favourites">🤍</button>
-          <span class="gift-badge">🎁 Gift Option</span>
-        </div>
-        <div class="card-body">
-          <div class="card-title-row">
-            <span class="card-name">Triple Chocolate Fudge</span>
-            <span class="card-price">$4.25</span>
-          </div>
-          <div class="card-bakery">
-            <span class="pin-icon">📍</span>
-            Choco Heaven · Uptown
-          </div>
-          <div class="card-rating">
-            <span class="star-icon">⭐</span>
-            5.0 <span class="review-count">(203 reviews)</span>
-          </div>
-          <div class="card-tags">
-            <span class="tag-pill">Indulgent</span>
-            <span class="tag-pill">Rich</span>
-            <span class="tag-pill">Premium</span>
-          </div>
-          <div class="card-meta">
-            <span class="clock-icon">🕐</span>
-            35–40 min
-            <span class="meta-dot">·</span>
-            Contains: Gluten, Dairy, Eggs, Soy
-          </div>
-          <button class="add-to-cart-btn" id="cart-btn-3">🛒 Add to Cart</button>
-        </div>
-      </article>
-
-      <!-- Card 4 — Salted Caramel Pretzel (with Your Match badge) -->
-      <article class="cookie-card" data-tags="Sweet &amp; Salty,Unique,Crunchy">
-        <div class="card-img-wrap">
-          <img src="assets/images/salted_caramel_pretzel_cookie.png" alt="Salted Caramel Pretzel cookie" loading="lazy">
-          <span class="match-badge">Your Match! ✨</span>
-          <button class="heart-btn" aria-label="Save to favourites">🤍</button>
-          <span class="gift-badge">🎁 Gift Option</span>
-        </div>
-        <div class="card-body">
-          <div class="card-title-row">
-            <span class="card-name">Salted Caramel Pretzel</span>
-            <span class="card-price">$4.00</span>
-          </div>
-          <div class="card-bakery">
-            <span class="pin-icon">📍</span>
-            Crunch &amp; Munch · West Side
-          </div>
-          <div class="card-rating">
-            <span class="star-icon">⭐</span>
-            4.7 <span class="review-count">(156 reviews)</span>
-          </div>
-          <div class="card-tags">
-            <span class="tag-pill">Sweet &amp; Salty</span>
-            <span class="tag-pill">Unique</span>
-            <span class="tag-pill">Crunchy</span>
-          </div>
-          <div class="card-meta">
-            <span class="clock-icon">🕐</span>
-            35–50 min
-            <span class="meta-dot">·</span>
-            Contains: Gluten, Dairy
-          </div>
-          <button class="add-to-cart-btn" id="cart-btn-4">🛒 Add to Cart</button>
-        </div>
-      </article>
-
-      <!-- Card 5 — Matcha White Chocolate -->
-      <article class="cookie-card" data-tags="Unique,Trendy,Instagram-worthy">
-        <div class="card-img-wrap">
-          <img src="assets/images/matcha_white_choc_cookie.png" alt="Matcha White Chocolate cookie" loading="lazy">
-          <button class="heart-btn" aria-label="Save to favourites">🤍</button>
-          <span class="gift-badge">🎁 Gift Option</span>
-        </div>
-        <div class="card-body">
-          <div class="card-title-row">
-            <span class="card-name">Matcha White Chocolate</span>
-            <span class="card-price">$4.50</span>
-          </div>
-          <div class="card-bakery">
-            <span class="pin-icon">📍</span>
-            Zen Bakes · East Village
-          </div>
-          <div class="card-rating">
-            <span class="star-icon">⭐</span>
-            4.6 <span class="review-count">(98 reviews)</span>
-          </div>
-          <div class="card-tags">
-            <span class="tag-pill">Unique</span>
-            <span class="tag-pill">Trendy</span>
-            <span class="tag-pill">Instagram-worthy</span>
-          </div>
-          <div class="card-meta">
-            <span class="clock-icon">🕐</span>
-            40–55 min
-            <span class="meta-dot">·</span>
-            Contains: Gluten, Dairy
-          </div>
-          <button class="add-to-cart-btn" id="cart-btn-5">🛒 Add to Cart</button>
-        </div>
-      </article>
-
-    </div><!-- /cookie-list -->
-  </div><!-- /browse-page -->
-
-  <!-- ── POST-QUIZ MATCH VIEW ── -->
-  <div class="match-page" id="match-page" aria-live="polite">
-
-    <h1 class="match-heading">Welcome to Cookie Heaven!</h1>
-    <p class="match-subheading">Meet your cookie match 🍪</p>
+    <h1 class="home-headline">Welcome to<br>Cookie Heaven!</h1>
+    <p class="home-sub">Meet your cookie match 🍪</p>
 
     <div class="match-card">
       <p class="match-card-title">Your Cookie Personality</p>
       <p class="match-personality-label" id="home-personality-label">Classic Cookie Lover</p>
-
-      <!-- Cookie image — swapped by JS if available, otherwise shows emoji -->
-      <div class="match-cookie-avatar-emoji" id="home-cookie-avatar-emoji">🍪</div>
-      <img class="match-cookie-avatar" id="home-cookie-avatar-img"
-           src="" alt="Your cookie match" style="display:none;">
-
-      <p class="match-cookie-name" id="home-cookie-name">
-        Perfect match: Double Chocolate Chip
-      </p>
-
-      <button class="find-cookie-btn" id="home-find-btn">
-        Find My Cookie
-      </button>
+      <div class="match-cookie-avatar-emoji" id="home-avatar-emoji">🍪</div>
+      <img class="match-cookie-avatar" id="home-avatar-img" src="" alt="Your cookie match" style="display:none;">
+      <p class="match-cookie-name" id="home-cookie-name">Perfect match: Double Chocolate Chip</p>
+      <button class="find-cookie-btn" id="home-find-btn">Find My Cookie</button>
     </div>
 
-    <button class="browse-all-btn" id="home-browse-all-btn">
-      Browse All Cookies
+    <button class="browse-all-btn" onclick="location.href='quiz.html'">
+      Take the Cookie Quiz 🍪
     </button>
 
-  </div><!-- /match-page -->
+  </main>
 
-  <!-- ── BOTTOM NAV ── -->
-  <nav class="bottom-nav" id="bottom-nav" aria-label="Bottom navigation">
-    <button class="bottom-nav-btn active" id="bnav-home" aria-label="Home">
+  <!-- Bottom Nav -->
+  <nav class="bottom-nav" aria-label="Bottom navigation">
+    <button class="bottom-nav-btn active" onclick="location.href='index.html'">
       <span>🏠</span>
       <span class="btn-label">Home</span>
     </button>
-    <button class="bottom-nav-btn" id="bnav-browse" aria-label="Browse cookies">
+    <button class="bottom-nav-btn" onclick="location.href='quiz.html'">
       <span>🍪</span>
       <span class="btn-label">Browse</span>
     </button>
-    <button class="bottom-nav-center" id="bnav-heart" aria-label="My matches">
-      ❤️
-    </button>
-    <button class="bottom-nav-btn" id="bnav-orders" aria-label="My orders">
+    <button class="bottom-nav-center" id="bnav-heart" aria-label="My matches">❤️</button>
+    <button class="bottom-nav-btn" onclick="location.href='order.html'">
       <span>📦</span>
       <span class="btn-label">Orders</span>
     </button>
-    <button class="bottom-nav-btn" id="bnav-profile" aria-label="Profile">
+    <button class="bottom-nav-btn">
       <span>👤</span>
       <span class="btn-label">Profile</span>
     </button>
-  </nav><!-- /bottom-nav -->
+  </nav>
 
   <script src="js/script.js"></script>
   <script>
-    // ── Filter pill logic ──
-    const pills = document.querySelectorAll('.filter-pill');
-    const cards = document.querySelectorAll('.cookie-card');
-
-    pills.forEach(pill => {
-      pill.addEventListener('click', () => {
-        pills.forEach(p => p.classList.remove('active'));
-        pill.classList.add('active');
-
-        const filter = pill.dataset.filter;
-        cards.forEach(card => {
-          const tags = card.dataset.tags || '';
-          if (filter === 'all' || tags.includes(filter)) {
-            card.style.display = '';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      });
-    });
-
-    // ── Heart toggle ──
-    document.querySelectorAll('.heart-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const liked = btn.classList.toggle('liked');
-        btn.textContent = liked ? '❤️' : '🤍';
-      });
-    });
-
-    // ── Add to cart feedback ──
-    document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const original = btn.textContent;
-        btn.textContent = '✅ Added!';
-        btn.style.backgroundColor = '#3a7a3a';
-        setTimeout(() => {
-          btn.textContent = original;
-          btn.style.backgroundColor = '';
-        }, 1500);
-      });
-    });
-    // ── Side menu open/close ──
+    // Side menu
     const menuOverlay = document.getElementById('menu-overlay');
     const sideDrawer  = document.getElementById('side-drawer');
     const menuBtn     = document.getElementById('menu-btn');
@@ -1144,96 +141,143 @@
     function openMenu() {
       sideDrawer.classList.add('open');
       menuOverlay.classList.add('open');
-      menuOverlay.setAttribute('aria-hidden', 'false');
-      sideDrawer.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
     }
-
     function closeMenu() {
       sideDrawer.classList.remove('open');
       menuOverlay.classList.remove('open');
-      menuOverlay.setAttribute('aria-hidden', 'true');
-      sideDrawer.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
     }
 
     menuBtn.addEventListener('click', openMenu);
     closeBtn.addEventListener('click', closeMenu);
     menuOverlay.addEventListener('click', closeMenu);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 
-    // Close on Escape key
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeMenu();
+    // Populate match card from localStorage if quiz was already taken
+    const cookieData = {
+      flavorExplorer:      { label: 'Flavor Explorer',       name: 'Salted Caramel Pretzel',   img: 'assets/images/salted_caramel_pretzel_cookie.png' },
+      classicComfortLover: { label: 'Classic Comfort Lover', name: 'Double Chocolate Chip',     img: 'assets/images/triple-chocolate-chunk-cookies-7189-500x500.jpg' },
+      socialButterfly:     { label: 'Social Butterfly',      name: 'Funfetti Sugar Cookie',     img: 'assets/images/sugar_cookie_pack.png' },
+      zenSeeker:           { label: 'Zen Seeker',            name: 'Matcha White Chocolate',    img: 'assets/images/matcha_white_choc_cookie.png' },
+      trendsetter:         { label: 'The Trendsetter',       name: 'Brown Butter Toffee',       img: 'assets/images/Chocolate-Chip-Cookies.jpg' },
+      purist:              { label: 'The Purist',            name: 'Classic Oatmeal Raisin',    img: 'assets/images/Chocolate-Chip-Cookies.jpg' },
+    };
+
+    const personality = localStorage.getItem('cookiePersonality');
+    if (personality && cookieData[personality]) {
+      const d = cookieData[personality];
+      document.getElementById('home-personality-label').textContent = d.label;
+      document.getElementById('home-cookie-name').textContent = 'Perfect match: ' + d.name;
+      const img   = document.getElementById('home-avatar-img');
+      const emoji = document.getElementById('home-avatar-emoji');
+      img.src = d.img;
+      img.onload  = () => { img.style.display = 'block'; emoji.style.display = 'none'; };
+      img.onerror = () => { img.style.display = 'none';  emoji.style.display = 'flex'; };
+      document.querySelector('.browse-all-btn').textContent = 'Browse All Cookies →';
+      document.querySelector('.browse-all-btn').onclick = () => location.href = 'result.html';
+    }
+
+    document.getElementById('home-find-btn').addEventListener('click', () => {
+      if (personality) {
+        location.href = 'result.html';
+      } else {
+        location.href = 'quiz.html';
+      }
     });
 
-    // ── Post-quiz home screen logic ──
-    (function initHomeView() {
-      const personality = localStorage.getItem('cookiePersonality');
-      const browsePage  = document.querySelector('.browse-page');
-      const matchPage   = document.getElementById('match-page');
-      const bnavHeart   = document.getElementById('bnav-heart');
-      const bnavHome    = document.getElementById('bnav-home');
-      const bnavBrowse  = document.getElementById('bnav-browse');
-
-      // Map personality keys → cookie data for the match card
-      const cookieData = {
-        flavorExplorer:      { label: 'Flavor Explorer',       name: 'Salted Caramel Pretzel',   img: 'img/salted_caramel_pretzel_cookie.png' },
-        classicComfortLover: { label: 'Classic Comfort Lover', name: 'Double Chocolate Chip',     img: 'img/triple-chocolate-chunk-cookies-7189-500x500.jpg' },
-        socialButterfly:     { label: 'Social Butterfly',      name: 'Funfetti Sugar Cookie',     img: 'img/sugar_cookie_pack.png' },
-        zenSeeker:           { label: 'Zen Seeker',            name: 'Matcha White Chocolate',    img: 'img/matcha_white_choc_cookie.png' },
-        trendsetter:         { label: 'The Trendsetter',       name: 'Brown Butter Toffee',       img: 'img/Chocolate-Chip-Cookies.jpg' },
-        purist:              { label: 'The Purist',            name: 'Classic Oatmeal Raisin',    img: 'img/Chocolate-Chip-Cookies.jpg' },
-      };
-
-      function showBrowseView() {
-        browsePage.style.display = '';
-        matchPage.classList.remove('visible');
-        bnavHome.classList.remove('active');
-        bnavBrowse.classList.add('active');
-        bnavHeart.classList.remove('active');
-      }
-
-      function showMatchView() {
-        browsePage.style.display = 'none';
-        matchPage.classList.add('visible');
-        bnavHome.classList.add('active');
-        bnavBrowse.classList.remove('active');
-        bnavHeart.classList.add('active');
-      }
-
-      if (personality && cookieData[personality]) {
-        const data = cookieData[personality];
-
-        // Populate card
-        document.getElementById('home-personality-label').textContent = data.label;
-        document.getElementById('home-cookie-name').textContent = 'Perfect match: ' + data.name;
-
-        // Try to show the cookie image
-        const imgEl   = document.getElementById('home-cookie-avatar-img');
-        const emojiEl = document.getElementById('home-cookie-avatar-emoji');
-        imgEl.src = data.img;
-        imgEl.onload  = () => { imgEl.style.display = 'block'; emojiEl.style.display = 'none'; };
-        imgEl.onerror = () => { imgEl.style.display = 'none';  emojiEl.style.display = 'flex'; };
-
-        // Show match view by default when quiz is done
-        showMatchView();
-      }
-
-      // Bottom nav: Home → match view (if quiz done), Browse → browse view
-      bnavHome.addEventListener('click', () => {
-        if (personality && cookieData[personality]) { showMatchView(); }
-      });
-      bnavBrowse.addEventListener('click', showBrowseView);
-      bnavHeart.addEventListener('click', () => {
-        if (personality && cookieData[personality]) { showMatchView(); }
-      });
-
-      // Buttons inside match card
-      document.getElementById('home-find-btn').addEventListener('click', () => {
-        window.location.href = 'result.html';
-      });
-      document.getElementById('home-browse-all-btn').addEventListener('click', showBrowseView);
-    })();
+    document.getElementById('bnav-heart').addEventListener('click', () => {
+      location.href = personality ? 'result.html' : 'quiz.html';
+    });
   </script>
+
+  <style>
+    .home-page {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 2.5rem 1rem 6rem;
+      text-align: center;
+    }
+    .home-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    .home-sub {
+      font-size: 1rem;
+      color: var(--color-text-mid);
+      margin-bottom: 2rem;
+    }
+    .match-card {
+      background: var(--color-card-bg);
+      border-radius: 24px;
+      padding: 1.75rem 1.5rem 1.5rem;
+      box-shadow: 0 6px 28px rgba(86, 38, 34, 0.10);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .match-card-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-text-mid);
+      margin-bottom: 0.4rem;
+    }
+    .match-personality-label {
+      font-size: 1rem;
+      color: var(--color-text-mid);
+      margin-bottom: 1.1rem;
+    }
+    .match-cookie-avatar-emoji {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      background: var(--color-hint-bg);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.6rem;
+      margin: 0 auto 1rem;
+      border: 3px solid var(--color-cta);
+    }
+    .match-cookie-avatar {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 1rem;
+      border: 3px solid var(--color-cta);
+      box-shadow: 0 4px 16px rgba(86, 38, 34, 0.13);
+    }
+    .match-cookie-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-cta-hover);
+      margin-bottom: 1.25rem;
+    }
+    .find-cookie-btn {
+      display: block; width: 100%;
+      background-color: var(--color-primary);
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem; font-weight: 700;
+      padding: 0.8rem; border: none; border-radius: 50px;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.15s;
+    }
+    .find-cookie-btn:hover { background-color: #562622; transform: translateY(-2px); }
+    .browse-all-btn {
+      display: block; width: 100%;
+      background: var(--color-cta);
+      color: var(--color-primary);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem; font-weight: 700;
+      padding: 0.8rem; border: none; border-radius: 50px;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.15s;
+    }
+    .browse-all-btn:hover { background-color: var(--color-cta-hover); color: #fff; transform: translateY(-2px); }
+  </style>
+
 </body>
 </html>

@@ -1,59 +1,450 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crumbs & Giggles</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crumbs &amp; Giggles — Your Order</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .order-page {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 5rem;
+    }
+    .order-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--color-text-dark);
+      margin-bottom: 0.25rem;
+    }
+    .order-sub {
+      font-size: 0.88rem;
+      color: var(--color-text-mid);
+      margin-bottom: 1.25rem;
+    }
+    .section-card {
+      background: var(--color-card-bg);
+      border-radius: 20px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 12px rgba(86, 38, 34, 0.07);
+    }
+    .section-card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 1rem;
+    }
+    .cart-item-card {
+      background: var(--color-card-bg);
+      border-radius: 16px;
+      padding: 1rem;
+      display: flex;
+      gap: 1rem;
+      box-shadow: 0 2px 12px rgba(86, 38, 34, 0.07);
+      margin-bottom: 0.75rem;
+      align-items: flex-start;
+    }
+    .cart-item-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 12px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .cart-item-info { flex: 1; }
+    .cart-item-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #E8807A;
+      margin-bottom: 0.2rem;
+    }
+    .cart-item-bakery {
+      font-size: 0.78rem;
+      color: var(--color-text-mid);
+      margin-bottom: 0.5rem;
+    }
+    .cart-item-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .qty-btn {
+      background: var(--color-hint-bg);
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s;
+    }
+    .qty-btn:hover { background: var(--color-cta); }
+    .qty-display {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--color-text-dark);
+      min-width: 20px;
+      text-align: center;
+    }
+    .cart-item-price {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--color-text-dark);
+      margin-left: auto;
+    }
+    .continue-shopping {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--color-text-mid);
+      text-decoration: underline;
+      cursor: pointer;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .continue-shopping:hover { color: var(--color-primary); }
+    .delivery-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.55rem 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .delivery-option:last-child { border-bottom: none; }
+    .delivery-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+    .delivery-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-text-dark);
+    }
+    .delivery-meta { font-size: 0.78rem; color: var(--color-text-mid); }
+    .price-summary {
+      background: var(--color-card-bg);
+      border-radius: 16px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 12px rgba(86, 38, 34, 0.07);
+    }
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      padding: 0.38rem 0;
+      border-bottom: 1px solid var(--color-border);
+      color: var(--color-text-mid);
+    }
+    .price-row:last-child {
+      border-bottom: none;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--color-text-dark);
+    }
+    .allergen-box {
+      background: #FFF8E1;
+      border-left: 4px solid #F0A020;
+      border-radius: 0 12px 12px 0;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    .allergen-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #7a5c00;
+      margin-bottom: 0.35rem;
+    }
+    .allergen-box p {
+      font-size: 0.82rem;
+      color: #7a5c00;
+      margin: 0;
+    }
+    .loyalty-banner {
+      background: #E8F5E9;
+      border-radius: 14px;
+      padding: 0.9rem 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #2e7d32;
+      text-align: center;
+    }
+    .checkout-btn {
+      display: block;
+      width: 100%;
+      background: var(--color-primary);
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 0.85rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.15s;
+      margin-bottom: 0.6rem;
+    }
+    .checkout-btn:hover { background: #562622; transform: translateY(-2px); }
+    .checkout-btn:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+    .secure-note {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--color-text-mid);
+      margin-bottom: 1rem;
+    }
+    .order-confirmation {
+      display: none;
+      text-align: center;
+      padding: 2rem 1rem;
+      background: var(--color-card-bg);
+      border-radius: 20px;
+      box-shadow: 0 6px 28px rgba(86, 38, 34, 0.10);
+      margin-top: 1rem;
+      animation: fadeInUp 0.4s ease-out both;
+    }
+    .order-confirmation.show { display: block; }
+    .confirm-checkmark { font-size: 3.5rem; display: block; margin-bottom: 0.75rem; }
+    .confirm-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 0.3rem;
+    }
+    .confirm-subtitle { font-size: 0.88rem; color: var(--color-text-mid); margin-bottom: 0.4rem; }
+    .order-number { font-size: 0.88rem; font-weight: 700; color: #E8807A; }
+  </style>
 </head>
-
 <body>
 
-    <nav>
-        <span>crumbs & giggles</span>
-        <a href="index.html">Home</a>
-    </nav>
+  <!-- Side Menu Overlay -->
+  <div class="menu-overlay" id="menu-overlay" aria-hidden="true"></div>
 
-    <div id="order-container">
-        <h1>Your Order</h1>
+  <!-- Side Drawer -->
+  <aside class="side-drawer" id="side-drawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <div class="drawer-header">
+      <button class="drawer-close-btn" id="drawer-close-btn" aria-label="Close menu">✕</button>
+      <span class="drawer-title">crumbs &amp; giggles</span>
+    </div>
+    <ul class="drawer-nav">
+      <li onclick="location.href='index.html'">
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">🏠</span><span class="drawer-nav-label">Home</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+      <li onclick="location.href='quiz.html'">
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">🎯</span><span class="drawer-nav-label">Cookie Quiz</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+      <li onclick="location.href='customize.html'">
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">🍪</span><span class="drawer-nav-label">Customize</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+      <li onclick="location.href='order.html'">
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">📦</span><span class="drawer-nav-label">My Orders</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+      <li>
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">👤</span><span class="drawer-nav-label">Profile</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+    </ul>
+  </aside>
 
-        <div id="order-summary">
-            <h3>Order Summary</h3>
-            <img id="order-cookie-image" src="" alt="Cookie" width="200">
-            <p id="order-cookie-name">Loading...</p>
-            <p id="order-dietary">Dietary: Loading...</p>
-            <p id="order-sweetness">Sweetness: Loading...</p>
-            <p id="order-toppings">Toppings: Loading...</p>
+  <!-- Navbar -->
+  <nav class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="Home">
+      <img src="assets/images/Logos png-02.png" alt="Crumbs &amp; Giggles logo">
+      <span class="nav-logo-text">crumbs &amp; giggles</span>
+    </a>
+    <div class="nav-actions">
+      <button class="nav-icon-btn" onclick="location.href='customize.html'" aria-label="Back">←</button>
+      <button class="nav-icon-btn" id="menu-btn" aria-label="Open menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- Order Page -->
+  <main class="order-page">
+
+    <h1 class="order-heading">Your Cart</h1>
+    <p class="order-sub">1 item ready for checkout</p>
+
+    <!-- Cart Item -->
+    <div class="cart-item-card">
+      <img id="cart-item-img" class="cart-item-img"
+           src="assets/images/salted_caramel_pretzel_cookie.png" alt="Your cookie">
+      <div class="cart-item-info">
+        <p class="cart-item-name" id="cart-item-name">Salted Caramel Pretzel</p>
+        <p class="cart-item-bakery" id="cart-item-bakery">Crunch &amp; Munch Bakery</p>
+        <div class="cart-item-controls">
+          <button class="qty-btn" id="qty-minus">−</button>
+          <span class="qty-display" id="qty-display">1</span>
+          <button class="qty-btn" id="qty-plus">+</button>
+          <span class="cart-item-price" id="cart-item-price">$4.00</span>
         </div>
-
-        <div id="allergen-box">
-            <strong>⚠️ Allergen Information</strong>
-            <p id="allergen-list">Loading...</p>
-        </div>
-
-        <div id="delivery-info">
-            <h3>Delivery Details</h3>
-            <p>Deliver to: Toronto, ON</p>
-            <p>Estimated Time: 30–45 minutes</p>
-            <p>Delivery Fee: $2.99</p>
-            <p>Subtotal: $7.99</p>
-            <p id="order-total">Total: $10.98</p>
-        </div>
-
-        <p id="loyalty-banner">🍪 You'll earn 79 Cookie Points with this order!</p>
-
-        <button id="place-order-btn">Proceed to Checkout</button>
-
-        <div id="order-confirmation" style="display:none">
-            <p>✅</p>
-            <h2>Your cookie is on the way!</h2>
-            <p id="order-number"></p>
-        </div>
-
+      </div>
     </div>
 
-    <script src="js/script.js"></script>
-</body>
+    <span class="continue-shopping" onclick="location.href='quiz.html'">
+      Continue Shopping
+    </span>
 
+    <!-- Delivery Options -->
+    <div class="section-card">
+      <h3>Delivery Options</h3>
+      <div class="delivery-option">
+        <span class="delivery-icon">🚚</span>
+        <div>
+          <p class="delivery-title">Standard Delivery</p>
+          <p class="delivery-meta">30–45 min · $2.99</p>
+        </div>
+      </div>
+      <div class="delivery-option">
+        <span class="delivery-icon">🎁</span>
+        <div>
+          <p class="delivery-title">Gift Wrap</p>
+          <p class="delivery-meta">Add beautiful gift packaging · +$3.00</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Allergen Warning -->
+    <div class="allergen-box">
+      <p class="allergen-title">⚠️ Allergen Information</p>
+      <p id="allergen-info">Contains: Gluten, Dairy</p>
+    </div>
+
+    <!-- Price Summary -->
+    <div class="price-summary">
+      <div class="price-row">
+        <span>Subtotal</span>
+        <span id="price-subtotal">$4.00</span>
+      </div>
+      <div class="price-row">
+        <span>Delivery Fee</span>
+        <span>$2.99</span>
+      </div>
+      <div class="price-row">
+        <span>Total</span>
+        <span id="price-total">$6.99</span>
+      </div>
+    </div>
+
+    <!-- Loyalty Banner -->
+    <div class="loyalty-banner">
+      🍪 You'll earn 79 Cookie Points with this order!
+    </div>
+
+    <!-- Checkout Button -->
+    <button class="checkout-btn" id="checkout-btn">
+      Proceed to Checkout →
+    </button>
+    <p class="secure-note">🛡️ Secure checkout</p>
+
+    <!-- Order Confirmation (hidden until checkout clicked) -->
+    <div class="order-confirmation" id="order-confirmation">
+      <span class="confirm-checkmark">✅</span>
+      <p class="confirm-title">Your cookie is on the way! 🍪</p>
+      <p class="confirm-subtitle">We're baking it fresh just for you.</p>
+      <p class="order-number" id="order-number">Order #CG-0000</p>
+    </div>
+
+  </main>
+
+  <!-- Bottom Nav -->
+  <nav class="bottom-nav" aria-label="Bottom navigation">
+    <button class="bottom-nav-btn" onclick="location.href='index.html'">
+      <span>🏠</span><span class="btn-label">Home</span>
+    </button>
+    <button class="bottom-nav-btn" onclick="location.href='quiz.html'">
+      <span>🍪</span><span class="btn-label">Browse</span>
+    </button>
+    <button class="bottom-nav-center" onclick="location.href='result.html'">❤️</button>
+    <button class="bottom-nav-btn active">
+      <span>📦</span><span class="btn-label">Orders</span>
+    </button>
+    <button class="bottom-nav-btn">
+      <span>👤</span><span class="btn-label">Profile</span>
+    </button>
+  </nav>
+
+  <script src="js/script.js"></script>
+  <script>
+    // Side menu
+    const menuOverlay = document.getElementById('menu-overlay');
+    const sideDrawer  = document.getElementById('side-drawer');
+    const menuBtn     = document.getElementById('menu-btn');
+    const closeBtn    = document.getElementById('drawer-close-btn');
+    function openMenu()  { sideDrawer.classList.add('open');    menuOverlay.classList.add('open');    document.body.style.overflow = 'hidden'; }
+    function closeMenu() { sideDrawer.classList.remove('open'); menuOverlay.classList.remove('open'); document.body.style.overflow = ''; }
+    menuBtn.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    menuOverlay.addEventListener('click', closeMenu);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+    // Cookie image and name map
+    const imgMap = {
+      flavorExplorer:      { img: 'assets/images/salted_caramel_pretzel_cookie.png',                    bakery: 'Crunch & Munch Bakery',   price: 4.00 },
+      classicComfortLover: { img: 'assets/images/triple-chocolate-chunk-cookies-7189-500x500.jpg',      bakery: 'Choco Heaven Bakery',     price: 4.25 },
+      socialButterfly:     { img: 'assets/images/sugar_cookie_pack.png',                                bakery: 'Rainbow Treats Co.',      price: 18.00 },
+      zenSeeker:           { img: 'assets/images/matcha_white_choc_cookie.png',                         bakery: 'Zen Bakes',               price: 4.50 },
+      trendsetter:         { img: 'assets/images/Chocolate-Chip-Cookies.jpg',                           bakery: 'Sweet Dreams Bakery',     price: 4.75 },
+      purist:              { img: 'assets/images/Chocolate-Chip-Cookies.jpg',                           bakery: 'Sweet Dreams Bakery',     price: 3.50 },
+    };
+
+    const personality   = localStorage.getItem('cookiePersonality') || 'flavorExplorer';
+    const cookieName    = localStorage.getItem('generatedCookie')   || 'Salted Caramel Pretzel';
+    const allergenInfo  = localStorage.getItem('allergenInfo')      || 'Contains: Gluten, Dairy';
+    const cookieInfo    = imgMap[personality] || imgMap.flavorExplorer;
+
+    // Populate cart item
+    document.getElementById('cart-item-name').textContent  = cookieName;
+    document.getElementById('cart-item-bakery').textContent = cookieInfo.bakery;
+    document.getElementById('cart-item-img').src           = cookieInfo.img;
+    document.getElementById('allergen-info').textContent   = allergenInfo;
+
+    // Quantity + price logic
+    let qty = 1;
+    const basePrice = cookieInfo.price;
+
+    function updatePrices() {
+      const sub   = (basePrice * qty).toFixed(2);
+      const total = (basePrice * qty + 2.99).toFixed(2);
+      document.getElementById('qty-display').textContent        = qty;
+      document.getElementById('cart-item-price').textContent    = '$' + sub;
+      document.getElementById('price-subtotal').textContent     = '$' + sub;
+      document.getElementById('price-total').textContent        = '$' + total;
+    }
+
+    document.getElementById('qty-plus').addEventListener('click', () => {
+      qty++;
+      updatePrices();
+    });
+
+    document.getElementById('qty-minus').addEventListener('click', () => {
+      if (qty > 1) { qty--; updatePrices(); }
+    });
+
+    // Checkout button
+    document.getElementById('checkout-btn').addEventListener('click', () => {
+      const btn = document.getElementById('checkout-btn');
+      btn.disabled    = true;
+      btn.textContent = 'Placing order...';
+
+      setTimeout(() => {
+        btn.style.display = 'none';
+        document.querySelector('.secure-note').style.display = 'none';
+
+        const orderNum = 'CG-' + Math.floor(1000 + Math.random() * 9000);
+        document.getElementById('order-number').textContent = 'Order #' + orderNum;
+        document.getElementById('order-confirmation').classList.add('show');
+
+        localStorage.setItem('lastOrderNumber',    orderNum);
+        localStorage.setItem('lastOrderTimestamp', new Date().toISOString());
+      }, 900);
+    });
+  </script>
+
+</body>
 </html>

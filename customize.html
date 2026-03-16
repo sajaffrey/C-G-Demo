@@ -1,57 +1,322 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crumbs & Giggles</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crumbs &amp; Giggles — Customize Your Cookie</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .customize-page {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 5rem;
+    }
+    .page-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 1.5rem;
+    }
+    .section-card {
+      background: var(--color-card-bg);
+      border-radius: 20px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 12px rgba(86, 38, 34, 0.07);
+    }
+    .section-card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 1rem;
+    }
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.55rem 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .toggle-row:last-child { border-bottom: none; }
+    .toggle-label {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--color-text-dark);
+    }
+    .toggle-switch {
+      position: relative;
+      width: 46px;
+      height: 26px;
+      flex-shrink: 0;
+    }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background: #ccc;
+      border-radius: 26px;
+      transition: background 0.2s;
+    }
+    .toggle-slider::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      left: 3px;
+      bottom: 3px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.2s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    }
+    .toggle-switch input:checked + .toggle-slider { background: #E8807A; }
+    .toggle-switch input:checked + .toggle-slider::before { transform: translateX(20px); }
+    .sweetness-slider {
+      width: 100%;
+      accent-color: #E8807A;
+      margin-bottom: 0.6rem;
+      cursor: pointer;
+    }
+    .sweetness-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--color-text-mid);
+    }
+    .toppings-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.65rem;
+    }
+    .topping-card {
+      background: var(--color-background);
+      border: 2px solid var(--color-border);
+      border-radius: 14px;
+      padding: 0.9rem 0.6rem;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.18s, background-color 0.18s, transform 0.15s;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-text-dark);
+    }
+    .topping-card:hover { border-color: #E8807A; transform: translateY(-2px); }
+    .topping-card.selected { border-color: #E8807A; background: #FFF0EF; }
+    .topping-emoji { font-size: 1.6rem; display: block; margin-bottom: 0.35rem; }
+    .topping-check { display: none; color: #E8807A; font-size: 0.8rem; margin-top: 0.25rem; }
+    .topping-card.selected .topping-check { display: block; }
+    .confirm-btn {
+      display: block;
+      width: 100%;
+      background: var(--color-primary);
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 0.85rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.15s;
+      margin-top: 0.5rem;
+    }
+    .confirm-btn:hover { background: #562622; transform: translateY(-2px); }
+  </style>
 </head>
-
 <body>
 
-    <nav>
-        <span>crumbs & giggles</span>
-        <a href="index.html">Home</a>
-    </nav>
+  <!-- Side Menu Overlay -->
+  <div class="menu-overlay" id="menu-overlay" aria-hidden="true"></div>
 
-    <div id="customize-container">
-        <h1>Customize Your Cookie</h1>
+  <!-- Side Drawer -->
+  <aside class="side-drawer" id="side-drawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <div class="drawer-header">
+      <button class="drawer-close-btn" id="drawer-close-btn" aria-label="Close menu">✕</button>
+      <span class="drawer-title">crumbs &amp; giggles</span>
+    </div>
+    <ul class="drawer-nav">
+      <li onclick="location.href='index.html'">
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">🏠</span><span class="drawer-nav-label">Home</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+      <li onclick="location.href='quiz.html'">
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">🎯</span><span class="drawer-nav-label">Cookie Quiz</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+      <li onclick="location.href='customize.html'">
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">🍪</span><span class="drawer-nav-label">Customize</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+      <li onclick="location.href='order.html'">
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">📦</span><span class="drawer-nav-label">My Orders</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+      <li>
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">👤</span><span class="drawer-nav-label">Profile</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+    </ul>
+  </aside>
 
-        <div id="dietary-section">
-            <h3>Dietary Preferences</h3>
-            <div><label>Gluten-Free <input type="checkbox" id="toggle-gluten"></label></div>
-            <div><label>Nut-Free <input type="checkbox" id="toggle-nut"></label></div>
-            <div><label>Vegan <input type="checkbox" id="toggle-vegan"></label></div>
-            <div><label>Sugar-Free <input type="checkbox" id="toggle-sugar"></label></div>
-        </div>
+  <!-- Navbar -->
+  <nav class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="Home">
+      <img src="assets/images/Logos png-02.png" alt="Crumbs &amp; Giggles logo">
+      <span class="nav-logo-text">crumbs &amp; giggles</span>
+    </a>
+    <div class="nav-actions">
+      <button class="nav-icon-btn" onclick="location.href='result.html'" aria-label="Back to result">←</button>
+      <button class="nav-icon-btn" id="menu-btn" aria-label="Open menu">☰</button>
+    </div>
+  </nav>
 
-        <div id="sweetness-section">
-            <h3>Sweetness Level</h3>
-            <input type="range" id="sweetness-slider" min="1" max="3" value="2">
-            <div>
-                <span>Lightly Sweet</span>
-                <span>Just Right</span>
-                <span>Extra Sweet</span>
-            </div>
-        </div>
+  <!-- Customize Page -->
+  <main class="customize-page">
 
-        <div id="toppings-section">
-            <h3>Choose Your Toppings</h3>
-            <div class="topping-card" data-topping="chocolate-chips">🍫 Chocolate Chips</div>
-            <div class="topping-card" data-topping="sprinkles">🌈 Rainbow Sprinkles</div>
-            <div class="topping-card" data-topping="sea-salt">🧂 Sea Salt</div>
-            <div class="topping-card" data-topping="caramel">🍬 Caramel Drizzle</div>
-            <div class="topping-card" data-topping="pretzel">🥨 Crushed Pretzel</div>
-            <div class="topping-card" data-topping="coconut">🥥 Coconut Flakes</div>
-            <div class="topping-card" data-topping="matcha">🍵 Matcha Powder</div>
-            <div class="topping-card" data-topping="peanut-butter">🥜 Peanut Butter Chips</div>
-        </div>
+    <h1 class="page-heading">Customize Your Cookie 🍪</h1>
 
-        <button id="confirm-btn">Confirm My Cookie 🍪</button>
+    <!-- Section 1: Dietary Preferences -->
+    <div class="section-card">
+      <h3>Dietary Preferences</h3>
+      <div class="toggle-row">
+        <span class="toggle-label">Gluten-Free</span>
+        <label class="toggle-switch">
+          <input type="checkbox" id="toggle-gluten">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div class="toggle-row">
+        <span class="toggle-label">Nut-Free</span>
+        <label class="toggle-switch">
+          <input type="checkbox" id="toggle-nut">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div class="toggle-row">
+        <span class="toggle-label">Vegan</span>
+        <label class="toggle-switch">
+          <input type="checkbox" id="toggle-vegan">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div class="toggle-row">
+        <span class="toggle-label">Sugar-Free</span>
+        <label class="toggle-switch">
+          <input type="checkbox" id="toggle-sugar">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
     </div>
 
-    <script src="js/script.js"></script>
-</body>
+    <!-- Section 2: Sweetness Level -->
+    <div class="section-card">
+      <h3>Sweetness Level</h3>
+      <input type="range" class="sweetness-slider" id="sweetness-slider" min="1" max="3" value="2">
+      <div class="sweetness-labels">
+        <span>Lightly Sweet</span>
+        <span>Just Right</span>
+        <span>Extra Sweet</span>
+      </div>
+    </div>
 
+    <!-- Section 3: Toppings -->
+    <div class="section-card">
+      <h3>Choose Your Toppings</h3>
+      <div class="toppings-grid">
+        <div class="topping-card" data-topping="chocolate-chips">
+          <span class="topping-emoji">🍫</span>Chocolate Chips<span class="topping-check">✓ Selected</span>
+        </div>
+        <div class="topping-card" data-topping="sprinkles">
+          <span class="topping-emoji">🌈</span>Rainbow Sprinkles<span class="topping-check">✓ Selected</span>
+        </div>
+        <div class="topping-card" data-topping="sea-salt">
+          <span class="topping-emoji">🧂</span>Sea Salt<span class="topping-check">✓ Selected</span>
+        </div>
+        <div class="topping-card" data-topping="caramel">
+          <span class="topping-emoji">🍬</span>Caramel Drizzle<span class="topping-check">✓ Selected</span>
+        </div>
+        <div class="topping-card" data-topping="pretzel">
+          <span class="topping-emoji">🥨</span>Crushed Pretzel<span class="topping-check">✓ Selected</span>
+        </div>
+        <div class="topping-card" data-topping="coconut">
+          <span class="topping-emoji">🥥</span>Coconut Flakes<span class="topping-check">✓ Selected</span>
+        </div>
+        <div class="topping-card" data-topping="matcha">
+          <span class="topping-emoji">🍵</span>Matcha Powder<span class="topping-check">✓ Selected</span>
+        </div>
+        <div class="topping-card" data-topping="peanut-butter">
+          <span class="topping-emoji">🥜</span>Peanut Butter Chips<span class="topping-check">✓ Selected</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 4: Confirm -->
+    <button class="confirm-btn" id="confirm-btn">Confirm My Cookie 🍪</button>
+
+  </main>
+
+  <!-- Bottom Nav -->
+  <nav class="bottom-nav" aria-label="Bottom navigation">
+    <button class="bottom-nav-btn" onclick="location.href='index.html'">
+      <span>🏠</span><span class="btn-label">Home</span>
+    </button>
+    <button class="bottom-nav-btn" onclick="location.href='quiz.html'">
+      <span>🍪</span><span class="btn-label">Browse</span>
+    </button>
+    <button class="bottom-nav-center" onclick="location.href='result.html'">❤️</button>
+    <button class="bottom-nav-btn active" onclick="location.href='order.html'">
+      <span>📦</span><span class="btn-label">Orders</span>
+    </button>
+    <button class="bottom-nav-btn">
+      <span>👤</span><span class="btn-label">Profile</span>
+    </button>
+  </nav>
+
+  <script src="js/script.js"></script>
+  <script>
+    // Side menu
+    const menuOverlay = document.getElementById('menu-overlay');
+    const sideDrawer  = document.getElementById('side-drawer');
+    const menuBtn     = document.getElementById('menu-btn');
+    const closeBtn    = document.getElementById('drawer-close-btn');
+    function openMenu()  { sideDrawer.classList.add('open');    menuOverlay.classList.add('open');    document.body.style.overflow = 'hidden'; }
+    function closeMenu() { sideDrawer.classList.remove('open'); menuOverlay.classList.remove('open'); document.body.style.overflow = ''; }
+    menuBtn.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    menuOverlay.addEventListener('click', closeMenu);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+    // Topping toggle
+    document.querySelectorAll('.topping-card').forEach(card => {
+      card.addEventListener('click', () => card.classList.toggle('selected'));
+    });
+
+    // Confirm button — save everything to localStorage then go to order.html
+    document.getElementById('confirm-btn').addEventListener('click', () => {
+      const dietaryPrefs = {
+        glutenFree: document.getElementById('toggle-gluten').checked,
+        nutFree:    document.getElementById('toggle-nut').checked,
+        vegan:      document.getElementById('toggle-vegan').checked,
+        sugarFree:  document.getElementById('toggle-sugar').checked,
+      };
+
+      const sliderVal = parseInt(document.getElementById('sweetness-slider').value);
+      const sweetnessMap = { 1: 'low', 2: 'medium', 3: 'high' };
+      const sweetnessLevel = sweetnessMap[sliderVal];
+
+      const selectedToppings = Array.from(
+        document.querySelectorAll('.topping-card.selected')
+      ).map(c => c.dataset.topping);
+
+      localStorage.setItem('dietaryPrefs',     JSON.stringify(dietaryPrefs));
+      localStorage.setItem('sweetnessLevel',   sweetnessLevel);
+      localStorage.setItem('selectedToppings', JSON.stringify(selectedToppings));
+
+      window.location.href = 'order.html';
+    });
+  </script>
+
+</body>
 </html>

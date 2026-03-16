@@ -1,87 +1,337 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crumbs & Giggles</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crumbs &amp; Giggles — Cookie Quiz</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .quiz-page {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 5rem;
+    }
+    .quiz-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    .quiz-back-btn {
+      background: none;
+      border: none;
+      font-size: 1.3rem;
+      color: var(--color-primary);
+      cursor: pointer;
+      padding: 0.3rem 0.5rem;
+      border-radius: 8px;
+    }
+    .quiz-back-btn:hover { background: var(--color-hint-bg); }
+    .question-counter {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #E8807A;
+    }
+    .quiz-skip-btn {
+      background: none;
+      border: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #E8807A;
+      cursor: pointer;
+    }
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      background: var(--color-border);
+      border-radius: 50px;
+      margin-bottom: 2rem;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: #E8807A;
+      border-radius: 50px;
+      transition: width 0.4s ease;
+    }
+    .question-block { display: none; }
+    .question-block.active {
+      display: block;
+      animation: fadeInUp 0.35s ease-out both;
+    }
+    .question-emoji {
+      font-size: 2.8rem;
+      text-align: center;
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+    .question-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-text-dark);
+      text-align: center;
+      margin-bottom: 1.75rem;
+      line-height: 1.3;
+    }
+    .answer-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .answer-card {
+      background: var(--color-card-bg);
+      border: 2px solid var(--color-border);
+      border-radius: 16px;
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--color-text-dark);
+      transition: border-color 0.18s, background-color 0.18s, transform 0.15s;
+    }
+    .answer-card:hover {
+      border-color: #E8807A;
+      background: #FFF0EF;
+      transform: translateX(4px);
+    }
+    .answer-emoji { font-size: 1.5rem; flex-shrink: 0; }
+    .quiz-hint {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--color-text-mid);
+      margin-top: 2rem;
+      padding: 0.6rem 1rem;
+      background: var(--color-hint-bg);
+      border-radius: 50px;
+    }
+  </style>
 </head>
-
 <body>
 
-    <nav>
-        <span>crumbs & giggles</span>
-        <a href="index.html">Home</a>
-    </nav>
+  <!-- Side Menu Overlay -->
+  <div class="menu-overlay" id="menu-overlay" aria-hidden="true"></div>
 
-    <div id="quiz-container">
+  <!-- Side Drawer -->
+  <aside class="side-drawer" id="side-drawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <div class="drawer-header">
+      <button class="drawer-close-btn" id="drawer-close-btn" aria-label="Close menu">✕</button>
+      <span class="drawer-title">crumbs &amp; giggles</span>
+    </div>
+    <ul class="drawer-nav">
+      <li onclick="location.href='index.html'">
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">🏠</span><span class="drawer-nav-label">Home</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+      <li onclick="location.href='quiz.html'">
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">🎯</span><span class="drawer-nav-label">Cookie Quiz</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+      <li onclick="location.href='customize.html'">
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">🍪</span><span class="drawer-nav-label">Customize</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+      <li onclick="location.href='order.html'">
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">📦</span><span class="drawer-nav-label">My Orders</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+      <li>
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">👤</span><span class="drawer-nav-label">Profile</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+    </ul>
+  </aside>
 
-        <div id="quiz-header">
-            <button id="back-btn">← Back</button>
-            <span id="question-counter">Question 1 of 5</span>
-            <button id="skip-btn">Skip</button>
-        </div>
+  <!-- Navbar -->
+  <nav class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="Home">
+      <img src="assets/images/Logos png-02.png" alt="Crumbs &amp; Giggles logo">
+      <span class="nav-logo-text">crumbs &amp; giggles</span>
+    </a>
+    <div class="nav-actions">
+      <button class="nav-icon-btn" id="menu-btn" aria-label="Open menu">☰</button>
+    </div>
+  </nav>
 
-        <div id="progress-bar-container">
-            <div id="progress-fill" style="width:20%"></div>
-        </div>
+  <!-- Quiz Page -->
+  <main class="quiz-page">
 
-        <!-- Question 1 -->
-        <div id="question-1">
-            <p>☀️</p>
-            <h2>It's Saturday morning. What's your vibe?</h2>
-            <div class="answer-card" data-value="adventure">🏃 Early rise & adventure!</div>
-            <div class="answer-card" data-value="cozy">📚 Cozy in bed with a book</div>
-            <div class="answer-card" data-value="social">🥞 Brunch with friends</div>
-            <div class="answer-card" data-value="creative">👨🍳 Baking something new</div>
-        </div>
-
-        <!-- Question 2 -->
-        <div id="question-2" style="display:none">
-            <p>✨</p>
-            <h2>Pick your ideal flavor combo</h2>
-            <div class="answer-card" data-value="sweet-salty">🧂 Sweet & salty</div>
-            <div class="answer-card" data-value="chocolatey">🍫 Rich & chocolatey</div>
-            <div class="answer-card" data-value="classic">🥛 Classic & comforting</div>
-            <div class="answer-card" data-value="unique">🌟 Unique & surprising</div>
-        </div>
-
-        <!-- Question 3 -->
-        <div id="question-3" style="display:none">
-            <p>🤔</p>
-            <h2>Your perfect cookie texture?</h2>
-            <div class="answer-card" data-value="chewy">☁️ Soft & chewy</div>
-            <div class="answer-card" data-value="crunchy">⚡ Crispy & crunchy</div>
-            <div class="answer-card" data-value="gooey">🌙 Gooey center</div>
-            <div class="answer-card" data-value="balanced">⚖️ Perfectly balanced</div>
-        </div>
-
-        <!-- Question 4 -->
-        <div id="question-4" style="display:none">
-            <p>🎉</p>
-            <h2>How do you like to celebrate?</h2>
-            <div class="answer-card" data-value="party">🎈 Big party with everyone</div>
-            <div class="answer-card" data-value="intimate">🕯️ Intimate dinner</div>
-            <div class="answer-card" data-value="spontaneous">🎪 Spontaneous adventure</div>
-            <div class="answer-card" data-value="solo">💝 Treat myself</div>
-        </div>
-
-        <!-- Question 5 -->
-        <div id="question-5" style="display:none">
-            <p>☕</p>
-            <h2>Your go-to beverage?</h2>
-            <div class="answer-card" data-value="coffee">☕ Classic coffee</div>
-            <div class="answer-card" data-value="fancylatte">🎨 Fancy latte</div>
-            <div class="answer-card" data-value="milk">🥛 Cold milk</div>
-            <div class="answer-card" data-value="unique-drink">🧋 Something unique</div>
-        </div>
-
-        <p>✦ Your perfect cookie is waiting!</p>
-
+    <div class="quiz-header">
+      <button class="quiz-back-btn" id="back-btn">←</button>
+      <span class="question-counter" id="question-counter">Question 1 of 5</span>
+      <button class="quiz-skip-btn" id="skip-btn">Skip</button>
     </div>
 
-    <script src="js/script.js"></script>
-</body>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill" style="width:20%;"></div>
+    </div>
 
+    <!-- Question 1 -->
+    <div class="question-block active" id="question-1">
+      <span class="question-emoji">☀️</span>
+      <h2 class="question-text">It's Saturday morning. What's your vibe?</h2>
+      <div class="answer-grid">
+        <div class="answer-card" data-value="adventure"><span class="answer-emoji">🏃</span> Early rise &amp; adventure!</div>
+        <div class="answer-card" data-value="cozy"><span class="answer-emoji">📚</span> Cozy in bed with a book</div>
+        <div class="answer-card" data-value="social"><span class="answer-emoji">🥞</span> Brunch with friends</div>
+        <div class="answer-card" data-value="creative"><span class="answer-emoji">👨🍳</span> Baking something new</div>
+      </div>
+    </div>
+
+    <!-- Question 2 -->
+    <div class="question-block" id="question-2">
+      <span class="question-emoji">✨</span>
+      <h2 class="question-text">Pick your ideal flavor combo</h2>
+      <div class="answer-grid">
+        <div class="answer-card" data-value="sweet-salty"><span class="answer-emoji">🧂</span> Sweet &amp; salty</div>
+        <div class="answer-card" data-value="chocolatey"><span class="answer-emoji">🍫</span> Rich &amp; chocolatey</div>
+        <div class="answer-card" data-value="classic"><span class="answer-emoji">🥛</span> Classic &amp; comforting</div>
+        <div class="answer-card" data-value="unique"><span class="answer-emoji">🌟</span> Unique &amp; surprising</div>
+      </div>
+    </div>
+
+    <!-- Question 3 -->
+    <div class="question-block" id="question-3">
+      <span class="question-emoji">🤔</span>
+      <h2 class="question-text">Your perfect cookie texture?</h2>
+      <div class="answer-grid">
+        <div class="answer-card" data-value="chewy"><span class="answer-emoji">☁️</span> Soft &amp; chewy</div>
+        <div class="answer-card" data-value="crunchy"><span class="answer-emoji">⚡</span> Crispy &amp; crunchy</div>
+        <div class="answer-card" data-value="gooey"><span class="answer-emoji">🌙</span> Gooey center</div>
+        <div class="answer-card" data-value="balanced"><span class="answer-emoji">⚖️</span> Perfectly balanced</div>
+      </div>
+    </div>
+
+    <!-- Question 4 -->
+    <div class="question-block" id="question-4">
+      <span class="question-emoji">🎉</span>
+      <h2 class="question-text">How do you like to celebrate?</h2>
+      <div class="answer-grid">
+        <div class="answer-card" data-value="party"><span class="answer-emoji">🎈</span> Big party with everyone</div>
+        <div class="answer-card" data-value="intimate"><span class="answer-emoji">🕯️</span> Intimate dinner</div>
+        <div class="answer-card" data-value="spontaneous"><span class="answer-emoji">🎪</span> Spontaneous adventure</div>
+        <div class="answer-card" data-value="solo"><span class="answer-emoji">💝</span> Treat myself</div>
+      </div>
+    </div>
+
+    <!-- Question 5 -->
+    <div class="question-block" id="question-5">
+      <span class="question-emoji">☕</span>
+      <h2 class="question-text">Your go-to beverage?</h2>
+      <div class="answer-grid">
+        <div class="answer-card" data-value="coffee"><span class="answer-emoji">☕</span> Classic coffee</div>
+        <div class="answer-card" data-value="juice"><span class="answer-emoji">🍊</span> Orange Juice</div>
+        <div class="answer-card" data-value="milk"><span class="answer-emoji">🥛</span> Cold milk</div>
+        <div class="answer-card" data-value="bubbletea"><span class="answer-emoji">🧋</span> Bubble tea</div>
+      </div>
+    </div>
+
+    <p class="quiz-hint">✦ Your perfect cookie is waiting!</p>
+
+  </main>
+
+  <!-- Bottom Nav -->
+  <nav class="bottom-nav" aria-label="Bottom navigation">
+    <button class="bottom-nav-btn" onclick="location.href='index.html'">
+      <span>🏠</span><span class="btn-label">Home</span>
+    </button>
+    <button class="bottom-nav-btn" onclick="location.href='index.html'">
+      <span>🍪</span><span class="btn-label">Browse</span>
+    </button>
+    <button class="bottom-nav-center active">❤️</button>
+    <button class="bottom-nav-btn" onclick="location.href='order.html'">
+      <span>📦</span><span class="btn-label">Orders</span>
+    </button>
+    <button class="bottom-nav-btn">
+      <span>👤</span><span class="btn-label">Profile</span>
+    </button>
+  </nav>
+
+  <script src="js/script.js"></script>
+  <script>
+    // Side menu
+    const menuOverlay = document.getElementById('menu-overlay');
+    const sideDrawer  = document.getElementById('side-drawer');
+    const menuBtn     = document.getElementById('menu-btn');
+    const closeBtn    = document.getElementById('drawer-close-btn');
+    function openMenu()  { sideDrawer.classList.add('open');    menuOverlay.classList.add('open');    document.body.style.overflow = 'hidden'; }
+    function closeMenu() { sideDrawer.classList.remove('open'); menuOverlay.classList.remove('open'); document.body.style.overflow = ''; }
+    menuBtn.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    menuOverlay.addEventListener('click', closeMenu);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+    // Quiz logic
+    let currentQuestion = 1;
+    const quizAnswers = {};
+    const scores = {
+      flavorExplorer: 0, classicComfortLover: 0, socialButterfly: 0,
+      zenSeeker: 0, trendsetter: 0, purist: 0
+    };
+
+    function showQuestion(n) {
+      document.querySelectorAll('.question-block').forEach(b => b.classList.remove('active'));
+      document.getElementById('question-' + n).classList.add('active');
+      document.getElementById('question-counter').textContent = 'Question ' + n + ' of 5';
+      document.getElementById('progress-fill').style.width = (n / 5 * 100) + '%';
+    }
+
+    function addScore(value) {
+      const map = {
+        adventure:    { flavorExplorer: 2, trendsetter: 1 },
+        spontaneous:  { flavorExplorer: 2, trendsetter: 1 },
+        cozy:         { zenSeeker: 2, purist: 1 },
+        intimate:     { zenSeeker: 2, purist: 1 },
+        social:       { socialButterfly: 2 },
+        party:        { socialButterfly: 2 },
+        creative:     { trendsetter: 2, flavorExplorer: 1 },
+        unique:       { trendsetter: 2, flavorExplorer: 1 },
+        'sweet-salty':{ flavorExplorer: 2, trendsetter: 1 },
+        chocolatey:   { classicComfortLover: 2 },
+        classic:      { purist: 2, classicComfortLover: 1 },
+        coffee:       { purist: 2, classicComfortLover: 1 },
+        milk:         { purist: 2, classicComfortLover: 1 },
+        juice:        { flavorExplorer: 1, socialButterfly: 1 },
+        bubbletea:    { trendsetter: 2, flavorExplorer: 1 },
+        gooey:        { flavorExplorer: 1, trendsetter: 1 },
+        chewy:        { zenSeeker: 1, classicComfortLover: 1 },
+        crunchy:      { purist: 2 },
+        balanced:     { purist: 1, zenSeeker: 1 },
+        solo:         { classicComfortLover: 2, purist: 1 },
+      };
+      const pts = map[value] || {};
+      for (const k in pts) scores[k] = (scores[k] || 0) + pts[k];
+    }
+
+    function submitQuiz() {
+      let winner = 'flavorExplorer', highest = -1;
+      for (const k in scores) { if (scores[k] > highest) { highest = scores[k]; winner = k; } }
+      localStorage.setItem('cookiePersonality', winner);
+      localStorage.setItem('quizAnswers', JSON.stringify(quizAnswers));
+      window.location.href = 'result.html';
+    }
+
+    document.querySelectorAll('.answer-card').forEach(card => {
+      card.addEventListener('click', () => {
+        quizAnswers['q' + currentQuestion] = card.dataset.value;
+        addScore(card.dataset.value);
+        if (currentQuestion < 5) { currentQuestion++; showQuestion(currentQuestion); }
+        else { submitQuiz(); }
+      });
+    });
+
+    document.getElementById('back-btn').addEventListener('click', () => {
+      if (currentQuestion > 1) { currentQuestion--; showQuestion(currentQuestion); }
+    });
+
+    document.getElementById('skip-btn').addEventListener('click', () => {
+      if (currentQuestion < 5) { currentQuestion++; showQuestion(currentQuestion); }
+      else { submitQuiz(); }
+    });
+  </script>
+
+</body>
 </html>

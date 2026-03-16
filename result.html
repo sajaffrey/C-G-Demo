@@ -1,47 +1,404 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crumbs & Giggles</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crumbs &amp; Giggles — Your Cookie Match</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .result-page {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 2rem 1rem 5rem;
+      text-align: center;
+    }
+    .result-you-are {
+      font-size: 1rem;
+      color: var(--color-text-mid);
+      margin-bottom: 0.2rem;
+    }
+    .personality-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #E8807A;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+    .personality-desc {
+      font-size: 0.9rem;
+      color: var(--color-text-mid);
+      margin-bottom: 1.75rem;
+      line-height: 1.5;
+      padding: 0 0.5rem;
+    }
+    .result-card {
+      background: var(--color-card-bg);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 6px 28px rgba(86, 38, 34, 0.10);
+      margin-bottom: 1.25rem;
+      text-align: left;
+    }
+    .result-card-img-wrap { position: relative; }
+    .result-card-img-wrap img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+    .result-heart-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(255,255,255,0.92);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      transition: transform 0.15s;
+    }
+    .result-heart-btn:hover { transform: scale(1.15); }
+    .result-heart-btn.liked { color: #e0344a; }
+    .result-card-body { padding: 1.25rem; }
+    .result-match-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-text-mid);
+      margin-bottom: 0.3rem;
+    }
+    .cookie-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #E8807A;
+      margin-bottom: 0.75rem;
+    }
+    .result-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.1rem;
+    }
+    .tag-pill {
+      border: 1.5px solid var(--color-border);
+      color: var(--color-text-mid);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.2rem 0.65rem;
+      border-radius: 50px;
+      background: transparent;
+    }
+    .get-cookie-btn {
+      display: block;
+      width: 100%;
+      background: var(--color-primary);
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      margin-bottom: 0.65rem;
+      transition: background-color 0.2s, transform 0.15s;
+    }
+    .get-cookie-btn:hover { background: #562622; transform: translateY(-2px); }
+    .share-btn {
+      display: block;
+      width: 100%;
+      background: transparent;
+      color: var(--color-primary);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 0.8rem;
+      border: 2px solid var(--color-cta);
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.15s;
+    }
+    .share-btn:hover { background: var(--color-hint-bg); transform: translateY(-2px); }
+    .why-box {
+      background: #FFF0EF;
+      border-radius: 20px;
+      padding: 1.25rem;
+      text-align: left;
+    }
+    .why-box h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 0.85rem;
+    }
+    .why-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+    .why-list li {
+      font-size: 0.88rem;
+      color: var(--color-text-dark);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      line-height: 1.4;
+    }
+    .why-list li::before {
+      content: '✦';
+      color: #E8807A;
+      flex-shrink: 0;
+    }
+  </style>
 </head>
-
 <body>
 
-    <nav>
-        <span>crumbs & giggles</span>
-        <a href="index.html">Home</a>
-    </nav>
+  <!-- Side Menu Overlay -->
+  <div class="menu-overlay" id="menu-overlay" aria-hidden="true"></div>
 
-    <div id="result-container">
+  <!-- Side Drawer -->
+  <aside class="side-drawer" id="side-drawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <div class="drawer-header">
+      <button class="drawer-close-btn" id="drawer-close-btn" aria-label="Close menu">✕</button>
+      <span class="drawer-title">crumbs &amp; giggles</span>
+    </div>
+    <ul class="drawer-nav">
+      <li onclick="location.href='index.html'">
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">🏠</span><span class="drawer-nav-label">Home</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+      <li onclick="location.href='quiz.html'">
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">🎯</span><span class="drawer-nav-label">Cookie Quiz</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+      <li onclick="location.href='customize.html'">
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">🍪</span><span class="drawer-nav-label">Customize</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+      <li onclick="location.href='order.html'">
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">📦</span><span class="drawer-nav-label">My Orders</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+      <li>
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">👤</span><span class="drawer-nav-label">Profile</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+    </ul>
+  </aside>
 
-        <div id="personality-section">
-            <p>You're a</p>
-            <h1 id="personality-name">Flavor Explorer!</h1>
-            <p id="personality-desc">Loading your result...</p>
+  <!-- Navbar -->
+  <nav class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="Home">
+      <img src="assets/images/Logos png-02.png" alt="Crumbs &amp; Giggles logo">
+      <span class="nav-logo-text">crumbs &amp; giggles</span>
+    </a>
+    <div class="nav-actions">
+      <button class="nav-icon-btn" onclick="location.href='quiz.html'" title="Retake quiz" aria-label="Retake quiz">🔄</button>
+      <button class="nav-icon-btn" id="menu-btn" aria-label="Open menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- Result Page -->
+  <main class="result-page">
+
+    <p class="result-you-are">You're a</p>
+    <h1 class="personality-name" id="personality-name">Flavor Explorer!</h1>
+    <p class="personality-desc" id="personality-desc">
+      You're always seeking the next exciting experience! Sweet, salty, and full of surprises, just like you.
+    </p>
+
+    <div class="result-card">
+      <div class="result-card-img-wrap">
+        <img id="cookie-image" src="assets/images/salted_caramel_pretzel_cookie.png" alt="Your cookie match">
+        <button class="result-heart-btn" id="result-heart-btn" aria-label="Save to favourites">🤍</button>
+      </div>
+      <div class="result-card-body">
+        <p class="result-match-label">Your Perfect Match</p>
+        <h2 class="cookie-name" id="cookie-name">Salted Caramel Pretzel</h2>
+        <div class="result-tags" id="result-tags">
+          <span class="tag-pill">Sweet &amp; Salty</span>
+          <span class="tag-pill">Homemade</span>
+          <span class="tag-pill">Fresh Daily</span>
+          <span class="tag-pill">Pretzel Crunch</span>
         </div>
-
-        <div id="cookie-section">
-            <img id="cookie-image" src="" alt="Your cookie match" width="300">
-            <p>Your Perfect Match:</p>
-            <h2 id="cookie-name">Loading...</h2>
-            <div id="cookie-tags"></div>
-            <div id="why-box">
-                <h3>Why this cookie?</h3>
-                <ul id="why-list"></ul>
-            </div>
-        </div>
-
-        <a id="find-cookie-btn" href="customize.html">Find Your Cookie →</a>
-        <a id="share-btn" href="#">Share Your Match</a>
-
+        <button class="get-cookie-btn" onclick="location.href='customize.html'">
+          Get Your Cookie →
+        </button>
+        <button class="share-btn" id="share-btn">
+          🔗 Share Your Match
+        </button>
+      </div>
     </div>
 
-    <p id="error-message" style="display:none">Please take the quiz first! <a href="quiz.html">Go to Quiz</a></p>
+    <div class="why-box">
+      <h3>Why this cookie?</h3>
+      <ul class="why-list" id="why-list">
+        <li>Perfectly crafted to match your unique personality</li>
+        <li>Based on your flavor preferences and lifestyle</li>
+        <li>Baked fresh by your baker who cares</li>
+      </ul>
+    </div>
 
-    <script src="js/script.js"></script>
+  </main>
+
+  <!-- Bottom Nav -->
+  <nav class="bottom-nav" aria-label="Bottom navigation">
+    <button class="bottom-nav-btn" onclick="location.href='index.html'">
+      <span>🏠</span><span class="btn-label">Home</span>
+    </button>
+    <button class="bottom-nav-btn" onclick="location.href='index.html'">
+      <span>🍪</span><span class="btn-label">Browse</span>
+    </button>
+    <button class="bottom-nav-center active">❤️</button>
+    <button class="bottom-nav-btn" onclick="location.href='order.html'">
+      <span>📦</span><span class="btn-label">Orders</span>
+    </button>
+    <button class="bottom-nav-btn">
+      <span>👤</span><span class="btn-label">Profile</span>
+    </button>
+  </nav>
+
+  <script src="js/script.js"></script>
+  <script>
+    // Side menu
+    const menuOverlay = document.getElementById('menu-overlay');
+    const sideDrawer  = document.getElementById('side-drawer');
+    const menuBtn     = document.getElementById('menu-btn');
+    const closeBtn    = document.getElementById('drawer-close-btn');
+    function openMenu()  { sideDrawer.classList.add('open');    menuOverlay.classList.add('open');    document.body.style.overflow = 'hidden'; }
+    function closeMenu() { sideDrawer.classList.remove('open'); menuOverlay.classList.remove('open'); document.body.style.overflow = ''; }
+    menuBtn.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    menuOverlay.addEventListener('click', closeMenu);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+    // Cookie database
+    const cookieDatabase = {
+      flavorExplorer: {
+        name: 'Flavor Explorer!',
+        desc: 'You\'re always seeking the next exciting experience! Sweet, salty, and full of surprises, just like you.',
+        cookie: 'Salted Caramel Pretzel',
+        tags: ['Sweet & Salty', 'Homemade', 'Fresh Daily', 'Pretzel Crunch'],
+        img: 'assets/images/salted_caramel_pretzel_cookie.png',
+        allergens: 'Contains: Gluten, Dairy',
+        why: [
+          'Your adventurous spirit craves bold, unexpected combinations',
+          'Sweet meets salty in perfect harmony, just like your personality',
+          'This artisan favourite surprises and delights with every bite'
+        ]
+      },
+      classicComfortLover: {
+        name: 'Classic Comfort Lover!',
+        desc: 'You find joy in the familiar and the warm. A cookie hug is basically your love language.',
+        cookie: 'Double Chocolate Chip',
+        tags: ['Rich', 'Indulgent', 'Classic', 'Comfort Bake'],
+        img: 'assets/images/triple-chocolate-chunk-cookies-7189-500x500.jpg',
+        allergens: 'Contains: Gluten, Dairy, Eggs, Soy',
+        why: [
+          'Rich chocolate matches your deep appreciation for comfort',
+          'A timeless classic — reliable, satisfying, always there for you',
+          'Baked with premium chocolate for maximum cosiness'
+        ]
+      },
+      socialButterfly: {
+        name: 'Social Butterfly!',
+        desc: 'Life is a party and you\'re always the guest of honour! Bright, fun, and full of energy.',
+        cookie: 'Funfetti Sugar Cookie',
+        tags: ['Colorful', 'Party Ready', 'Shareable', 'Fun'],
+        img: 'assets/images/sugar_cookie_pack.png',
+        allergens: 'Contains: Gluten, Dairy',
+        why: [
+          'Colourful and celebratory — just like your social energy',
+          'Perfect for sharing with your whole crew',
+          'These cookies literally sparkle, and so do you'
+        ]
+      },
+      zenSeeker: {
+        name: 'Zen Seeker!',
+        desc: 'You find beauty in stillness and prefer depth over noise. Calm, mindful, and wonderfully unique.',
+        cookie: 'Matcha White Chocolate',
+        tags: ['Earthy', 'Unique', 'Artisan', 'Mindful'],
+        img: 'assets/images/matcha_white_choc_cookie.png',
+        allergens: 'Contains: Gluten, Dairy',
+        why: [
+          'Earthy matcha balanced with creamy white chocolate mirrors your inner calm',
+          'A sophisticated flavour for a thoughtful soul',
+          'Crafted mindfully, just the way you appreciate things'
+        ]
+      },
+      trendsetter: {
+        name: 'The Trendsetter!',
+        desc: 'You were into artisan baked goods before it was cool. Innovative, stylish, always ahead of the curve.',
+        cookie: 'Brown Butter Toffee',
+        tags: ['Bold', 'Artisan', 'Trendy', 'Innovative'],
+        img: 'assets/images/Chocolate-Chip-Cookies.jpg',
+        allergens: 'Contains: Gluten, Dairy, Eggs',
+        why: [
+          'Nutty brown butter elevates this cookie to an art form',
+          'Complex, sophisticated flavours for someone who does not settle',
+          'The cookie everyone will be talking about — but you already knew'
+        ]
+      },
+      purist: {
+        name: 'The Purist!',
+        desc: 'You believe the classics exist for a reason. Quality, simplicity, and timeless perfection are your values.',
+        cookie: 'Classic Oatmeal Raisin',
+        tags: ['Wholesome', 'Traditional', 'Honest', 'Timeless'],
+        img: 'assets/images/Chocolate-Chip-Cookies.jpg',
+        allergens: 'Contains: Gluten, Dairy, Eggs',
+        why: [
+          'Honest, wholesome ingredients — no gimmicks, just greatness',
+          'A recipe perfected over generations, loved by those who appreciate craft',
+          'The original comfort cookie for the most discerning palate'
+        ]
+      }
+    };
+
+    // Populate page from localStorage
+    const personality = localStorage.getItem('cookiePersonality') || 'flavorExplorer';
+    const data = cookieDatabase[personality] || cookieDatabase.flavorExplorer;
+
+    document.getElementById('personality-name').textContent = data.name;
+    document.getElementById('personality-desc').textContent = data.desc;
+    document.getElementById('cookie-name').textContent = data.cookie;
+    document.getElementById('cookie-image').src = data.img;
+    document.getElementById('cookie-image').alt = data.cookie;
+    document.getElementById('result-tags').innerHTML = data.tags.map(t => '<span class="tag-pill">' + t + '</span>').join('');
+    document.getElementById('why-list').innerHTML = data.why.map(w => '<li>' + w + '</li>').join('');
+    localStorage.setItem('generatedCookie', data.cookie);
+    localStorage.setItem('allergenInfo', data.allergens);
+
+    // Heart toggle
+    document.getElementById('result-heart-btn').addEventListener('click', function() {
+      const liked = this.classList.toggle('liked');
+      this.textContent = liked ? '❤️' : '🤍';
+    });
+
+    // Share button
+    document.getElementById('share-btn').addEventListener('click', () => {
+      const text = 'I\'m a ' + data.name + ' My perfect cookie match is the ' + data.cookie + '! 🍪 Find yours at Crumbs & Giggles.';
+      if (navigator.share) {
+        navigator.share({ title: 'My Cookie Match', text });
+      } else {
+        navigator.clipboard.writeText(text).then(() => {
+          const btn = document.getElementById('share-btn');
+          const orig = btn.textContent;
+          btn.textContent = '✅ Copied to clipboard!';
+          setTimeout(() => { btn.textContent = orig; }, 2000);
+        });
+      }
+    });
+  </script>
+
 </body>
-
 </html>
