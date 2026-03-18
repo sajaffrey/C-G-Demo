@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crumbs &amp; Giggles — Discovery</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="menu-overlay" id="menu-overlay" aria-hidden="true"></div>
+
+  <aside class="side-drawer" id="side-drawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <div class="drawer-header">
+      <button class="drawer-close-btn" id="drawer-close-btn" aria-label="Close menu">✕</button>
+      <span class="drawer-title">crumbs &amp; giggles</span>
+    </div>
+    <ul class="drawer-nav">
+      <li onclick="location.href='index.html'">
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">🏠</span><span class="drawer-nav-label">Home</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+      <li onclick="location.href='discovery.html'">
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">🍪</span><span class="drawer-nav-label">Discovery</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+      <li onclick="location.href='customize.html'">
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">✨</span><span class="drawer-nav-label">Create Your Own</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+      <li onclick="location.href='order.html'">
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">📦</span><span class="drawer-nav-label">My Orders</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+      <li>
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">🎁</span><span class="drawer-nav-label">Rewards &amp; Loyalty</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+      <li onclick="location.href='profile.html'">
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">👤</span><span class="drawer-nav-label">Profile</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+    </ul>
+  </aside>
+
+  <nav class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="Home">
+      <img src="assets/images/Logos png-02.png" alt="Crumbs &amp; Giggles logo">
+      <span class="nav-logo-text">crumbs &amp; giggles</span>
+    </a>
+    <div class="nav-actions">
+      <button class="nav-icon-btn" aria-label="Search">⌕</button>
+      <button class="nav-icon-btn" id="menu-btn" aria-label="Open menu">☰</button>
+    </div>
+  </nav>
+
+  <main class="discovery-page">
+    <header class="discovery-header">
+      <h1 class="discovery-title">Discover Artisan Cookies</h1>
+      <p class="discovery-subtitle">Fresh picks from local bakers, all in one place.</p>
+    </header>
+
+    <div class="discovery-toolbar">
+      <div class="discovery-filters" aria-label="Cookie categories">
+        <button class="discovery-filter-btn active" type="button" data-filter="all">All</button>
+        <button class="discovery-filter-btn" type="button" data-filter="classic">Classic</button>
+        <button class="discovery-filter-btn" type="button" data-filter="unique">Unique</button>
+        <button class="discovery-filter-btn" type="button" data-filter="bestseller">Bestseller</button>
+      </div>
+      <button class="discovery-sort-btn" type="button" id="sort-btn">↕ Sort</button>
+    </div>
+
+    <section class="catalog-list" id="catalog-list" aria-label="Product catalog">
+      <article class="catalog-card" data-category="classic bestseller" data-price="3.50">
+        <div class="catalog-card-media">
+          <img src="assets/images/Chocolate-Chip-Cookies.jpg" alt="Original Chocolate Chip cookies">
+          <span class="catalog-badge">Popular</span>
+          <span class="catalog-gift-badge">Gift Option</span>
+          <button class="catalog-fav-btn" type="button" aria-label="Save Original Chocolate Chip">♡</button>
+        </div>
+        <div class="catalog-card-body">
+          <div class="catalog-title-row">
+            <h2 class="catalog-product-name">Original Chocolate Chip</h2>
+            <span class="catalog-price">$3.50</span>
+          </div>
+          <div class="catalog-location-row">📍 Sweet Dreams Bakery · Downtown</div>
+          <div class="catalog-rating-row"><strong>★ 4.9</strong> <span>(127 reviews)</span></div>
+          <div class="catalog-tags">
+            <span class="catalog-tag">Classic</span>
+            <span class="catalog-tag">Bestseller</span>
+            <span class="catalog-tag">Artisan</span>
+          </div>
+          <div class="catalog-meta-row">🕒 30-45 min · Contains: Gluten, Dairy, Eggs</div>
+          <button class="catalog-add-btn" type="button">🛒 Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="catalog-card" data-category="classic" data-price="18.00">
+        <div class="catalog-card-media">
+          <img src="assets/images/sugar_cookie_pack.png" alt="Sugar Cookie Variety Pack">
+          <span class="catalog-badge">Best for Parties</span>
+          <button class="catalog-fav-btn" type="button" aria-label="Save Sugar Cookie Variety Pack">♡</button>
+        </div>
+        <div class="catalog-card-body">
+          <div class="catalog-title-row">
+            <h2 class="catalog-product-name">Sugar Cookie Variety Pack</h2>
+            <span class="catalog-price">$18.00</span>
+          </div>
+          <div class="catalog-location-row">📍 Rainbow Treats Co. · Midtown</div>
+          <div class="catalog-rating-row"><strong>★ 4.8</strong> <span>(95 reviews)</span></div>
+          <div class="catalog-tags">
+            <span class="catalog-tag">Pack</span>
+            <span class="catalog-tag">Party</span>
+            <span class="catalog-tag">Crowd Favorite</span>
+          </div>
+          <div class="catalog-meta-row">🕒 40-50 min · Contains: Gluten, Dairy</div>
+          <button class="catalog-add-btn" type="button">🛒 Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="catalog-card" data-category="bestseller classic" data-price="4.25">
+        <div class="catalog-card-media">
+          <img src="assets/images/triple-chocolate-chunk-cookies-7189-500x500.jpg" alt="Triple Chocolate Fudge cookie">
+          <span class="catalog-badge">Rich Pick</span>
+          <button class="catalog-fav-btn" type="button" aria-label="Save Triple Chocolate Fudge">♡</button>
+        </div>
+        <div class="catalog-card-body">
+          <div class="catalog-title-row">
+            <h2 class="catalog-product-name">Triple Chocolate Fudge</h2>
+            <span class="catalog-price">$4.25</span>
+          </div>
+          <div class="catalog-location-row">📍 Choco Heaven Bakery · Uptown</div>
+          <div class="catalog-rating-row"><strong>★ 5.0</strong> <span>(88 reviews)</span></div>
+          <div class="catalog-tags">
+            <span class="catalog-tag">Classic</span>
+            <span class="catalog-tag">Chocolate</span>
+            <span class="catalog-tag">Bestseller</span>
+          </div>
+          <div class="catalog-meta-row">🕒 25-35 min · Contains: Gluten, Dairy, Soy</div>
+          <button class="catalog-add-btn" type="button">🛒 Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="catalog-card" data-category="unique bestseller" data-price="4.00">
+        <div class="catalog-card-media">
+          <img src="assets/images/salted_caramel_pretzel_cookie.png" alt="Salted Caramel Pretzel cookie">
+          <span class="catalog-badge">Chef Pick</span>
+          <button class="catalog-fav-btn" type="button" aria-label="Save Salted Caramel Pretzel">♡</button>
+        </div>
+        <div class="catalog-card-body">
+          <div class="catalog-title-row">
+            <h2 class="catalog-product-name">Salted Caramel Pretzel</h2>
+            <span class="catalog-price">$4.00</span>
+          </div>
+          <div class="catalog-location-row">📍 Crunch &amp; Munch · West Side</div>
+          <div class="catalog-rating-row"><strong>★ 4.7</strong> <span>(46 reviews)</span></div>
+          <div class="catalog-tags">
+            <span class="catalog-tag">Sweet &amp; Salty</span>
+            <span class="catalog-tag">Unique</span>
+            <span class="catalog-tag">Crunchy</span>
+          </div>
+          <div class="catalog-meta-row">🕒 35-45 min · Contains: Gluten, Dairy</div>
+          <button class="catalog-add-btn" type="button">🛒 Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="catalog-card" data-category="unique" data-price="4.50">
+        <div class="catalog-card-media">
+          <img src="assets/images/matcha_white_choc_cookie.png" alt="Matcha White Chocolate cookie">
+          <span class="catalog-badge">New</span>
+          <button class="catalog-fav-btn" type="button" aria-label="Save Matcha White Chocolate">♡</button>
+        </div>
+        <div class="catalog-card-body">
+          <div class="catalog-title-row">
+            <h2 class="catalog-product-name">Matcha White Chocolate</h2>
+            <span class="catalog-price">$4.50</span>
+          </div>
+          <div class="catalog-location-row">📍 Zen Bakes · East Village</div>
+          <div class="catalog-rating-row"><strong>★ 4.6</strong> <span>(18 reviews)</span></div>
+          <div class="catalog-tags">
+            <span class="catalog-tag">Earthy</span>
+            <span class="catalog-tag">Unique</span>
+            <span class="catalog-tag">Premium</span>
+          </div>
+          <div class="catalog-meta-row">🕒 30-40 min · Contains: Gluten, Dairy</div>
+          <button class="catalog-add-btn" type="button">🛒 Add to Cart</button>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Bottom navigation">
+    <button class="bottom-nav-btn" onclick="location.href='index.html'">
+      <span>🏠</span><span class="btn-label">Home</span>
+    </button>
+    <button class="bottom-nav-btn active" onclick="location.href='discovery.html'">
+      <span>🍪</span><span class="btn-label">Browse</span>
+    </button>
+    <button class="bottom-nav-center" onclick="location.href='result.html'">❤️</button>
+    <button class="bottom-nav-btn" onclick="location.href='order.html'">
+      <span>📦</span><span class="btn-label">Orders</span>
+    </button>
+    <button class="bottom-nav-btn" onclick="location.href='profile.html'">
+      <span>👤</span><span class="btn-label">Profile</span>
+    </button>
+  </nav>
+
+  <script>
+    const menuOverlay = document.getElementById('menu-overlay');
+    const sideDrawer = document.getElementById('side-drawer');
+    const menuBtn = document.getElementById('menu-btn');
+    const closeBtn = document.getElementById('drawer-close-btn');
+
+    function openMenu() {
+      sideDrawer.classList.add('open');
+      menuOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      sideDrawer.classList.remove('open');
+      menuOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    menuBtn.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    menuOverlay.addEventListener('click', closeMenu);
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') closeMenu();
+    });
+
+    const filterButtons = document.querySelectorAll('.discovery-filter-btn');
+    const cards = document.querySelectorAll('.catalog-card');
+    const sortButton = document.getElementById('sort-btn');
+    let sortAscending = true;
+
+    function applyFilter(category) {
+      filterButtons.forEach(button => {
+        button.classList.toggle('active', button.dataset.filter === category);
+      });
+
+      cards.forEach(card => {
+        const categories = card.dataset.category.split(' ');
+        const matches = category === 'all' || categories.includes(category);
+        card.hidden = !matches;
+      });
+    }
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => applyFilter(button.dataset.filter));
+    });
+
+    sortButton.addEventListener('click', () => {
+      const list = document.getElementById('catalog-list');
+      const visibleCards = Array.from(cards).filter(card => !card.hidden);
+      visibleCards
+        .sort((a, b) => sortAscending
+          ? Number(a.dataset.price) - Number(b.dataset.price)
+          : Number(b.dataset.price) - Number(a.dataset.price))
+        .forEach(card => list.appendChild(card));
+
+      sortAscending = !sortAscending;
+      sortButton.textContent = sortAscending ? '↕ Sort' : '↕ Price';
+    });
+
+    document.querySelectorAll('.catalog-fav-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        button.textContent = button.textContent === '♡' ? '♥' : '♡';
+      });
+    });
+  </script>
+</body>
+</html>

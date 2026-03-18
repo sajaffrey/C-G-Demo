@@ -53,7 +53,7 @@
         </div>
         <span class="drawer-nav-arrow">›</span>
       </li>
-      <li>
+      <li onclick="location.href='profile.html'">
         <div class="drawer-nav-left">
           <span class="drawer-nav-icon">👤</span>
           <span class="drawer-nav-label">Profile</span>
@@ -81,6 +81,7 @@
   <nav class="nav-inner">
     <a href="index.html" class="nav-logo" aria-label="Crumbs &amp; Giggles home">
       <img src="assets/images/Logos png-02.png" alt="Crumbs &amp; Giggles logo">
+      <span class="nav-logo-text">crumbs &amp; giggles</span>
     </a>
     <div class="nav-actions">
       <button class="nav-icon-btn" aria-label="Search">🔍</button>
@@ -115,7 +116,7 @@
       <span>🏠</span>
       <span class="btn-label">Home</span>
     </button>
-    <button class="bottom-nav-btn" onclick="location.href='quiz.html'">
+    <button class="bottom-nav-btn" onclick="location.href='discovery.html'">
       <span>🍪</span>
       <span class="btn-label">Browse</span>
     </button>
@@ -124,7 +125,7 @@
       <span>📦</span>
       <span class="btn-label">Orders</span>
     </button>
-    <button class="bottom-nav-btn">
+    <button class="bottom-nav-btn" onclick="location.href='profile.html'">
       <span>👤</span>
       <span class="btn-label">Profile</span>
     </button>
@@ -175,15 +176,11 @@
       img.onload  = () => { img.style.display = 'block'; emoji.style.display = 'none'; };
       img.onerror = () => { img.style.display = 'none';  emoji.style.display = 'flex'; };
       document.querySelector('.browse-all-btn').textContent = 'Browse All Cookies →';
-      document.querySelector('.browse-all-btn').onclick = () => location.href = 'result.html';
+      document.querySelector('.browse-all-btn').onclick = () => location.href = 'discovery.html';
     }
 
     document.getElementById('home-find-btn').addEventListener('click', () => {
-      if (personality) {
-        location.href = 'result.html';
-      } else {
-        location.href = 'quiz.html';
-      }
+      location.href = 'quiz.html';
     });
 
     document.getElementById('bnav-heart').addEventListener('click', () => {
