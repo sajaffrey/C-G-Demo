@@ -36,7 +36,7 @@
         <div class="drawer-nav-left"><span class="drawer-nav-icon">📦</span><span class="drawer-nav-label">My Orders</span></div>
         <span class="drawer-nav-arrow">›</span>
       </li>
-      <li>
+      <li onclick="location.href='profile.html'">
         <div class="drawer-nav-left"><span class="drawer-nav-icon">👤</span><span class="drawer-nav-label">Profile</span></div>
         <span class="drawer-nav-arrow">›</span>
       </li>
@@ -103,19 +103,18 @@
     <button class="bottom-nav-btn" onclick="location.href='index.html'">
       <span>🏠</span><span class="btn-label">Home</span>
     </button>
-    <button class="bottom-nav-btn" onclick="location.href='index.html'">
+    <button class="bottom-nav-btn" onclick="location.href='discovery.html'">
       <span>🍪</span><span class="btn-label">Browse</span>
     </button>
     <button class="bottom-nav-center active">❤️</button>
     <button class="bottom-nav-btn" onclick="location.href='order.html'">
       <span>📦</span><span class="btn-label">Orders</span>
     </button>
-    <button class="bottom-nav-btn">
+    <button class="bottom-nav-btn" onclick="location.href='profile.html'">
       <span>👤</span><span class="btn-label">Profile</span>
     </button>
   </nav>
 
-  <script src="js/script.js"></script>
   <script>
     // Side menu
     const menuOverlay = document.getElementById('menu-overlay');
@@ -218,8 +217,10 @@
     document.getElementById('personality-name').textContent = data.name;
     document.getElementById('personality-desc').textContent = data.desc;
     document.getElementById('cookie-name').textContent = data.cookie;
-    document.getElementById('cookie-image').src = data.img;
-    document.getElementById('cookie-image').alt = data.cookie;
+    const cookieImage = document.getElementById('cookie-image');
+    cookieImage.src = data.img;
+    cookieImage.alt = data.cookie;
+    cookieImage.onerror = () => { cookieImage.src = 'assets/images/Chocolate-Chip-Cookies.jpg'; };
     document.getElementById('result-tags').innerHTML = data.tags.map(t => '<span class="tag-pill">' + t + '</span>').join('');
     document.getElementById('why-list').innerHTML = data.why.map(w => '<li>' + w + '</li>').join('');
     localStorage.setItem('generatedCookie', data.cookie);

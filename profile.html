@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crumbs &amp; Giggles — Profile</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="menu-overlay" id="menu-overlay" aria-hidden="true"></div>
+
+  <aside class="side-drawer" id="side-drawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <div class="drawer-header">
+      <button class="drawer-close-btn" id="drawer-close-btn" aria-label="Close menu">✕</button>
+      <span class="drawer-title">crumbs &amp; giggles</span>
+    </div>
+    <ul class="drawer-nav">
+      <li onclick="location.href='index.html'">
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">🏠</span><span class="drawer-nav-label">Home</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+      <li onclick="location.href='discovery.html'">
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">🍪</span><span class="drawer-nav-label">Discovery</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+      <li onclick="location.href='customize.html'">
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">🍪</span><span class="drawer-nav-label">Customize</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+      <li onclick="location.href='order.html'">
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">📦</span><span class="drawer-nav-label">My Orders</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+      <li onclick="location.href='profile.html'">
+        <div class="drawer-nav-left"><span class="drawer-nav-icon">👤</span><span class="drawer-nav-label">Profile</span></div>
+        <span class="drawer-nav-arrow">›</span>
+      </li>
+    </ul>
+  </aside>
+
+  <nav class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="Home">
+      <img src="assets/images/Logos png-02.png" alt="Crumbs &amp; Giggles logo">
+      <span class="nav-logo-text">crumbs &amp; giggles</span>
+    </a>
+    <div class="nav-actions">
+      <button class="nav-icon-btn" onclick="location.href='index.html'" aria-label="Back">←</button>
+      <button class="nav-icon-btn" id="menu-btn" aria-label="Open menu">☰</button>
+    </div>
+  </nav>
+
+  <main class="profile-page">
+    <section class="profile-hero">
+      <div class="profile-avatar">AM</div>
+      <div class="profile-identity">
+        <p class="profile-kicker">Demo Account</p>
+        <h1 class="profile-name">Ava Martinez</h1>
+        <p class="profile-handle">@avamartinez</p>
+      </div>
+    </section>
+
+    <section class="profile-card">
+      <h2 class="profile-section-title">Profile Details</h2>
+      <div class="profile-detail-row">
+        <span class="profile-label">Email</span>
+        <span class="profile-value">ava.martinez@example.com</span>
+      </div>
+      <div class="profile-detail-row">
+        <span class="profile-label">Phone</span>
+        <span class="profile-value">(416) 555-0148</span>
+      </div>
+      <div class="profile-detail-row">
+        <span class="profile-label">Default Pickup</span>
+        <span class="profile-value">Sweet Dreams Bakery</span>
+      </div>
+      <div class="profile-detail-row">
+        <span class="profile-label">Favorite Flavor</span>
+        <span class="profile-value">Salted Caramel Pretzel</span>
+      </div>
+      <div class="profile-detail-row">
+        <span class="profile-label">Allergy Notes</span>
+        <span class="profile-value">Prefers nut-free options</span>
+      </div>
+    </section>
+
+    <section class="profile-card profile-stats">
+      <div class="profile-stat">
+        <strong>12</strong>
+        <span>Orders</span>
+      </div>
+      <div class="profile-stat">
+        <strong>248</strong>
+        <span>Cookie Points</span>
+      </div>
+      <div class="profile-stat">
+        <strong>4</strong>
+        <span>Saved Picks</span>
+      </div>
+    </section>
+
+    <section class="profile-card">
+      <h2 class="profile-section-title">Member Notes</h2>
+      <p class="profile-note">Loves trying seasonal drops, usually orders on Fridays, and prefers gift-ready packaging for special occasions.</p>
+      <button class="find-cookie-btn" type="button">Edit Profile</button>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Bottom navigation">
+    <button class="bottom-nav-btn" onclick="location.href='index.html'">
+      <span>🏠</span><span class="btn-label">Home</span>
+    </button>
+    <button class="bottom-nav-btn" onclick="location.href='discovery.html'">
+      <span>🍪</span><span class="btn-label">Browse</span>
+    </button>
+    <button class="bottom-nav-center" onclick="location.href='result.html'">❤️</button>
+    <button class="bottom-nav-btn" onclick="location.href='order.html'">
+      <span>📦</span><span class="btn-label">Orders</span>
+    </button>
+    <button class="bottom-nav-btn active" onclick="location.href='profile.html'">
+      <span>👤</span><span class="btn-label">Profile</span>
+    </button>
+  </nav>
+
+  <script>
+    const menuOverlay = document.getElementById('menu-overlay');
+    const sideDrawer = document.getElementById('side-drawer');
+    const menuBtn = document.getElementById('menu-btn');
+    const closeBtn = document.getElementById('drawer-close-btn');
+
+    function openMenu() {
+      sideDrawer.classList.add('open');
+      menuOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      sideDrawer.classList.remove('open');
+      menuOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    menuBtn.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    menuOverlay.addEventListener('click', closeMenu);
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') closeMenu();
+    });
+  </script>
+</body>
+</html>
