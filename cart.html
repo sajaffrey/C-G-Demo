@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart — Crumbs & Giggles</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/new-screens.css">
+</head>
+<body style="background-color: #FAF6F5;">
+
+  <div class="screen-container">
+    <header class="header-minimal">
+      <button class="back-btn-circle" onclick="history.back()">←</button>
+      <h1 class="header-title-main">Your Cart</h1>
+      <div style="width: 40px;"></div>
+    </header>
+
+    <div id="cart-content">
+      <p id="item-count-sub" style="color: var(--color-text-mid); margin-bottom: 1.5rem; font-weight: 500;">2 items ready for checkout</p>
+
+      <!-- Item 1 -->
+      <div class="cart-item-card">
+        <img src="assets/images/Chocolate-Chip-Cookies.jpg" alt="Item 1" class="cart-item-img">
+        <div class="cart-item-info">
+          <div class="cart-item-name">Triple Chocolate Delight</div>
+          <div class="cart-item-bakery">Sweet Dreams Bakery</div>
+          <div class="cart-item-controls">
+            <button class="qty-btn" onclick="updateQty(-1)">−</button>
+            <span class="qty-display" id="item1-qty">6</span>
+            <button class="qty-btn" onclick="updateQty(1)">+</button>
+            <span class="cart-item-price" id="item1-price">$17.94</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 2 (Custom) -->
+      <div class="cart-item-card" id="custom-item-card" style="display: none;">
+        <img src="assets/images/matcha_white_choc_cookie.png" alt="Custom" class="cart-item-img">
+        <div class="cart-item-info">
+          <div class="cart-item-name" id="custom-name">Custom Masterpiece</div>
+          <div class="cart-item-bakery">C&G Kitchen</div>
+          <div class="cart-item-controls">
+            <button class="qty-btn" onclick="updateCustomQty(-1)">−</button>
+            <span class="qty-display" id="custom-qty-val">1</span>
+            <button class="qty-btn" onclick="updateCustomQty(1)">+</button>
+            <span class="cart-item-price" id="custom-price">$3.50</span>
+          </div>
+        </div>
+      </div>
+
+      <span class="continue-shopping" onclick="location.href='discovery.html'" style="display: block; margin-top: 1rem; color: var(--color-accent); font-weight: 600; cursor: pointer;">
+        + Add more cookies
+      </span>
+
+      <!-- Delivery Options -->
+      <div class="section-card" style="margin-top: 2rem;">
+        <h3 style="margin-bottom: 1rem; font-family: 'Playfair Display', serif;">Delivery Options</h3>
+        <div class="delivery-option" style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--color-background); border-radius: 15px;">
+          <span style="font-size: 1.5rem;">🚚</span>
+          <div>
+            <p style="font-weight: 700; font-size: 0.9rem;">Standard Delivery</p>
+            <p style="font-size: 0.8rem; color: var(--color-text-mid);">30–45 min · $2.50</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="price-summary" style="margin-top: 2rem; background: white; padding: 1.5rem; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+        <div class="price-row" style="display: flex; justify-content: space-between; margin-bottom: 0.75rem;">
+            <span>Subtotal</span>
+            <span id="sub-price">$17.94</span>
+        </div>
+        <div class="price-row" style="display: flex; justify-content: space-between; margin-bottom: 0.75rem;">
+            <span>Delivery Fee</span>
+            <span>$2.50</span>
+        </div>
+        <div class="price-row" style="display: flex; justify-content: space-between; border-top: 2px solid var(--color-border); padding-top: 1rem; margin-top: 0.5rem; font-weight: 800; font-size: 1.2rem; color: var(--color-primary);">
+            <span>Total</span>
+            <span id="total-price">$20.44</span>
+        </div>
+      </div>
+
+      <div class="loyalty-banner" style="margin-top: 1.5rem; background: #FFF9F0; padding: 1rem; border-radius: 15px; text-align: center; font-size: 0.85rem; color: #8C6B65; border: 1px solid #FFE0B2;">
+        🍪 You'll earn <span id="points-val">84</span> Cookie Points with this order!
+      </div>
+
+      <div style="margin-top: 2rem; position: sticky; bottom: 20px; z-index: 10;">
+        <button class="checkout-btn" onclick="location.href='order.html'">Proceed to Checkout</button>
+      </div>
+
+      <p class="secure-note" style="text-align: center; margin-top: 1.5rem; font-size: 0.8rem; color: var(--color-text-mid);">
+        🛡️ Secure checkout powered by Crumbs
+      </p>
+    </div>
+  </div>
+
+  <script>
+    let item1Qty = 6;
+    const item1BasePrice = 2.99;
+    let customQty = 0;
+    let customBasePrice = 0;
+
+    function updateQty(delta) {
+      item1Qty = Math.max(1, item1Qty + delta);
+      document.getElementById('item1-qty').innerText = item1Qty;
+      renderTotals();
+    }
+
+    function updateCustomQty(delta) {
+      if (customQty > 0) {
+        customQty = Math.max(1, customQty + delta);
+        document.getElementById('custom-qty-val').innerText = customQty;
+        renderTotals();
+      }
+    }
+
+    function renderTotals() {
+      const item1Total = item1Qty * item1BasePrice;
+      const customTotal = customQty * customBasePrice;
+      
+      document.getElementById('item1-price').innerText = `$${item1Total.toFixed(2)}`;
+      
+      if (customQty > 0) {
+        document.getElementById('custom-price').innerText = `$${customTotal.toFixed(2)}`;
+      }
+
+      const subtotal = item1Total + customTotal;
+      const delivery = 2.50;
+      const total = subtotal + delivery;
+
+      document.getElementById('sub-price').innerText = `$${subtotal.toFixed(2)}`;
+      document.getElementById('total-price').innerText = `$${total.toFixed(2)}`;
+      document.getElementById('points-val').innerText = Math.floor(total * 5);
+      document.getElementById('item-count-sub').innerText = `${(customQty > 0 ? 2 : 1)} items ready for checkout`;
+    }
+
+    const custom = localStorage.getItem('lastCustomCookie');
+    if (custom) {
+        const data = JSON.parse(custom);
+        document.getElementById('custom-item-card').style.display = 'flex';
+        document.getElementById('custom-name').innerText = data.name || 'Custom Masterpiece';
+        customQty = 1;
+        customBasePrice = parseFloat(data.price.replace('$', '')) || 3.50;
+    }
+    renderTotals();
+  </script>
+</body>
+</html>
+
+</body>
+</html>

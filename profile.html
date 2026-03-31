@@ -102,7 +102,7 @@
     <section class="profile-card">
       <h2 class="profile-section-title">Member Notes</h2>
       <p class="profile-note">Loves trying seasonal drops, usually orders on Fridays, and prefers gift-ready packaging for special occasions.</p>
-      <button class="find-cookie-btn" type="button">Edit Profile</button>
+      <button class="find-cookie-btn" type="button" id="edit-profile-btn">Edit Profile</button>
     </section>
   </main>
 
@@ -113,7 +113,7 @@
     <button class="bottom-nav-btn" onclick="location.href='discovery.html'">
       <span>🍪</span><span class="btn-label">Browse</span>
     </button>
-    <button class="bottom-nav-center" onclick="location.href='result.html'">❤️</button>
+    <button class="bottom-nav-center" onclick="location.href='my-cookies.html'">❤️</button>
     <button class="bottom-nav-btn" onclick="location.href='order.html'">
       <span>📦</span><span class="btn-label">Orders</span>
     </button>
@@ -146,6 +146,10 @@
     document.addEventListener('keydown', event => {
       if (event.key === 'Escape') closeMenu();
     });
+
+    document.getElementById('edit-profile-btn').onclick = () => {
+      alert('Profile editing coming soon!');
+    };
   </script>
 </body>
 </html>

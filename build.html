@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Build Your Cookie — Crumbs & Giggles</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/new-screens.css">
+</head>
+<body style="background-color: #FAF6F5;">
+
+  <div class="screen-container">
+    <!-- Header -->
+    <header class="header-minimal">
+      <button class="back-btn-circle" onclick="history.back()">←</button>
+      <h1 class="header-title-main">Build Your Cookie</h1>
+      <div style="width: 40px;"></div> <!-- Spacer -->
+    </header>
+
+    <!-- Progress Indicator -->
+    <div class="progress-container">
+      <div class="progress-meta">
+        <span id="step-count">Step 1 of 5</span>
+        <span class="price-sum" id="total-price">$0.00</span>
+      </div>
+      <div class="progress-bar-steps">
+        <div class="progress-step-item active" data-step="1"></div>
+        <div class="progress-step-item" data-step="2"></div>
+        <div class="progress-step-item" data-step="3"></div>
+        <div class="progress-step-item" data-step="4"></div>
+        <div class="progress-step-item" data-step="5"></div>
+      </div>
+    </div>
+
+    <!-- Live Preview Area -->
+    <div class="cookie-preview-hero">
+      <h2 id="preview-title">Cookie Base</h2>
+      <p id="preview-subtitle">Choose your cookie foundation</p>
+      <img src="assets/images/Chocolate-Chip-Cookies.jpg" alt="Cookie Preview" class="cookie-img-main" id="preview-img">
+    </div>
+
+    <!-- Step 1: Base Selection -->
+    <div class="step-view active" id="step-1">
+      <div class="selection-grid">
+        <div class="option-card-new selected" data-id="classic" data-price="2.99" onclick="selectOption(1, this)">
+          <div class="popular-badge">Popular</div>
+          <div class="option-icon-box">🥣</div>
+          <div class="info">
+            <div class="option-name">Classic Dough</div>
+            <div class="option-desc">Traditional butter cookie base</div>
+          </div>
+          <div class="option-price">$2.99</div>
+        </div>
+        <div class="option-card-new" data-id="chocolate" data-price="3.29" onclick="selectOption(1, this)">
+          <div class="option-icon-box">🍫</div>
+          <div class="info">
+            <div class="option-name">Chocolate Dough</div>
+            <div class="option-desc">Rich cocoa cookie base</div>
+          </div>
+          <div class="option-price">$3.29</div>
+        </div>
+        <div class="option-card-new" data-id="oatmeal" data-price="2.99" onclick="selectOption(1, this)">
+          <div class="option-icon-box">🌾</div>
+          <div class="info">
+            <div class="option-name">Oatmeal Dough</div>
+            <div class="option-desc">Hearty oat cookie base</div>
+          </div>
+          <div class="option-price">$2.99</div>
+        </div>
+        <div class="option-card-new" data-id="pb" data-price="3.49" onclick="selectOption(1, this)">
+          <div class="option-icon-box">🥜</div>
+          <div class="info">
+            <div class="option-name">Peanut Butter</div>
+            <div class="option-desc">Creamy PB cookie base</div>
+          </div>
+          <div class="option-price">$3.49</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2: Chips Selection -->
+    <div class="step-view" id="step-2" style="display: none;">
+      <div class="selection-grid">
+        <div class="option-card-new" data-id="milk-chips" data-price="0.50" onclick="selectOption(2, this)">
+          <div class="option-icon-box">🍪</div>
+          <div class="info">
+            <div class="option-name">Milk Chocolate Chips</div>
+            <div class="option-desc">Smooth & creamy</div>
+          </div>
+          <div class="option-price">+$0.50</div>
+        </div>
+        <div class="option-card-new" data-id="dark-chips" data-price="0.60" onclick="selectOption(2, this)">
+          <div class="option-icon-box">🍫</div>
+          <div class="info">
+            <div class="option-name">Dark Chocolate Chips</div>
+            <div class="option-desc">Intense cocoa flavor</div>
+          </div>
+          <div class="option-price">+$0.60</div>
+        </div>
+        <div class="option-card-new" data-id="white-chips" data-price="0.50" onclick="selectOption(2, this)">
+          <div class="option-icon-box">⚪</div>
+          <div class="info">
+            <div class="option-name">White Chocolate Chips</div>
+            <div class="option-desc">Sweet and buttery</div>
+          </div>
+          <div class="option-price">+$0.50</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3: Mix-ins -->
+    <div class="step-view" id="step-3" style="display: none;">
+      <div class="selection-grid">
+        <div class="option-card-new" data-id="walnuts" data-price="0.75" onclick="selectOption(3, this)">
+          <div class="option-icon-box">🌰</div>
+          <div class="info">
+            <div class="option-name">Toasted Walnuts</div>
+            <div class="option-desc">Crunchy and earthy</div>
+          </div>
+          <div class="option-price">+$0.75</div>
+        </div>
+        <div class="option-card-new" data-id="macadamia" data-price="1.00" onclick="selectOption(3, this)">
+          <div class="option-icon-box">🥥</div>
+          <div class="info">
+            <div class="option-name">Macadamia Nuts</div>
+            <div class="option-desc">Buttery and soft</div>
+          </div>
+          <div class="option-price">+$1.00</div>
+        </div>
+        <div class="option-card-new" data-id="pretzels" data-price="0.40" onclick="selectOption(3, this)">
+          <div class="option-icon-box">🥨</div>
+          <div class="info">
+            <div class="option-name">Salty Pretzels</div>
+            <div class="option-desc">For that sweet & salty kick</div>
+          </div>
+          <div class="option-price">+$0.40</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4: Toppings -->
+    <div class="step-view" id="step-4" style="display: none;">
+      <div class="selection-grid">
+        <div class="option-card-new" data-id="sea-salt" data-price="0.20" onclick="selectOption(4, this)">
+          <div class="option-icon-box">🧂</div>
+          <div class="info">
+            <div class="option-name">Maldon Sea Salt</div>
+            <div class="option-desc">Flaky salt finish</div>
+          </div>
+          <div class="option-price">+$0.20</div>
+        </div>
+        <div class="option-card-new" data-id="sprinkles" data-price="0.30" onclick="selectOption(4, this)">
+          <div class="option-icon-box">🌈</div>
+          <div class="info">
+            <div class="option-name">Rainbow Sprinkles</div>
+            <div class="option-desc">Colorful and fun</div>
+          </div>
+          <div class="option-price">+$0.30</div>
+        </div>
+        <div class="option-card-new" data-id="mini-mallows" data-price="0.50" onclick="selectOption(4, this)">
+          <div class="option-icon-box">☁️</div>
+          <div class="info">
+            <div class="option-name">Mini Marshmallows</div>
+            <div class="option-desc">Toasted and gooey</div>
+          </div>
+          <div class="option-price">+$0.50</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 5: Drizzle -->
+    <div class="step-view" id="step-5" style="display: none;">
+      <div class="selection-grid">
+        <div class="option-card-new" data-id="n-drizzle" data-price="0.00" onclick="selectOption(5, this)">
+          <div class="option-icon-box">❌</div>
+          <div class="info">
+            <div class="option-name">No Drizzle</div>
+            <div class="option-desc">Keep it simple</div>
+          </div>
+          <div class="option-price">$0.00</div>
+        </div>
+        <div class="option-card-new" data-id="caramel" data-price="0.50" onclick="selectOption(5, this)">
+          <div class="option-icon-box">🍯</div>
+          <div class="info">
+            <div class="option-name">Caramel Drizzle</div>
+            <div class="option-desc">Silk smooth caramel</div>
+          </div>
+          <div class="option-price">+$0.50</div>
+        </div>
+        <div class="option-card-new" data-id="choc-fudge" data-price="0.50" onclick="selectOption(5, this)">
+          <div class="option-icon-box">🍩</div>
+          <div class="info">
+            <div class="option-name">Hot Fudge Drizzle</div>
+            <div class="option-desc">Rich melted chocolate</div>
+          </div>
+          <div class="option-price">+$0.50</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Sticky Bar -->
+    <div class="sticky-bottom-bar">
+      <button class="next-step-btn" id="main-action-btn" onclick="nextStep()">
+        Next Step <span>›</span>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    let currentStep = 1;
+    let selections = {
+      1: { id: 'classic', price: 2.99, name: 'Classic Dough' },
+      2: null,
+      3: null,
+      4: null,
+      5: null
+    };
+
+    const stepInfo = {
+      1: { title: 'Cookie Base', sub: 'Choose your cookie foundation', img: 'assets/images/Chocolate-Chip-Cookies.jpg' },
+      2: { title: 'Add Chips', sub: 'The heart of every cookie', img: 'assets/images/images.jpg' },
+      3: { title: 'Mix-ins', sub: 'Extra texture and flavor', img: 'assets/images/istockphoto-1467913868-612x612.jpg' },
+      4: { title: 'Toppings', sub: 'A perfect finishing touch', img: 'assets/images/pngtree-chocolate-chip-cookies-on-a-tray-with-christmas-tree-in-the-image_16159412.jpg' },
+      5: { title: 'Sweet Drizzle', sub: 'Top it all off', img: 'assets/images/matcha_white_choc_cookie.png' }
+    };
+
+    function selectOption(step, element) {
+      // Remove selected class from all cards in this step
+      const stepView = document.getElementById(`step-${step}`);
+      stepView.querySelectorAll('.option-card-new').forEach(c => c.classList.remove('selected'));
+      
+      // Add selected class to chosen card
+      element.classList.add('selected');
+
+      // Update selections
+      selections[step] = {
+        id: element.dataset.id,
+        price: parseFloat(element.dataset.price),
+        name: element.querySelector('.option-name').innerText
+      };
+
+      updateState();
+    }
+
+    function updateState() {
+      // Update price
+      let total = 0;
+      Object.values(selections).forEach(s => {
+        if (s) total += s.price;
+      });
+      document.getElementById('total-price').innerText = `$${total.toFixed(2)}`;
+
+      // Update Preview
+      const info = stepInfo[currentStep];
+      document.getElementById('preview-title').innerText = info.title;
+      document.getElementById('preview-subtitle').innerText = info.sub;
+      document.getElementById('preview-img').src = info.img;
+
+      // Update Progress Bar
+      document.querySelectorAll('.progress-step-item').forEach(item => {
+        const stepNum = parseInt(item.dataset.step);
+        if (stepNum <= currentStep) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+
+      document.getElementById('step-count').innerText = `Step ${currentStep} of 5`;
+
+      // Update Bottom Button
+      const btn = document.getElementById('main-action-btn');
+      if (currentStep === 5) {
+        btn.innerHTML = 'Add to Cart <span>🛒</span>';
+      } else {
+        btn.innerHTML = 'Next Step <span>›</span>';
+      }
+    }
+
+    function nextStep() {
+      if (currentStep < 5) {
+        document.getElementById(`step-${currentStep}`).style.display = 'none';
+        currentStep++;
+        document.getElementById(`step-${currentStep}`).style.display = 'block';
+        updateState();
+      } else {
+        // Finish build
+        const finalCookie = {
+          name: 'Your Custom Masterpiece',
+          selections: Object.values(selections),
+          price: document.getElementById('total-price').innerText,
+          image: stepInfo[1].img
+        };
+        localStorage.setItem('lastCustomCookie', JSON.stringify(finalCookie));
+        window.location.href = 'cart.html';
+      }
+    }
+
+    // Initial state
+    updateState();
+  </script>
+
+</body>
+</html>

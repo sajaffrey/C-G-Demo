@@ -32,10 +32,10 @@
         </div>
         <span class="drawer-nav-arrow">›</span>
       </li>
-      <li onclick="location.href='customize.html'">
+      <li onclick="location.href='build.html'">
         <div class="drawer-nav-left">
-          <span class="drawer-nav-icon">🍪</span>
-          <span class="drawer-nav-label">Customize</span>
+          <span class="drawer-nav-icon">✨</span>
+          <span class="drawer-nav-label">Build Your Cookie</span>
         </div>
         <span class="drawer-nav-arrow">›</span>
       </li>
@@ -46,7 +46,7 @@
         </div>
         <span class="drawer-nav-arrow">›</span>
       </li>
-      <li>
+      <li onclick="alert('Rewards & Loyalty coming soon!')">
         <div class="drawer-nav-left">
           <span class="drawer-nav-icon">🎁</span>
           <span class="drawer-nav-label">Rewards &amp; Loyalty</span>
@@ -60,14 +60,14 @@
         </div>
         <span class="drawer-nav-arrow">›</span>
       </li>
-      <li>
+      <li onclick="alert('Settings coming soon!')">
         <div class="drawer-nav-left">
           <span class="drawer-nav-icon">⚙️</span>
           <span class="drawer-nav-label">Settings</span>
         </div>
         <span class="drawer-nav-arrow">›</span>
       </li>
-      <li>
+      <li onclick="alert('Reviews coming soon!')">
         <div class="drawer-nav-left">
           <span class="drawer-nav-icon">⭐</span>
           <span class="drawer-nav-label">Reviews</span>
@@ -84,7 +84,7 @@
       <span class="nav-logo-text">crumbs &amp; giggles</span>
     </a>
     <div class="nav-actions">
-      <button class="nav-icon-btn" aria-label="Search">🔍</button>
+      <button class="nav-icon-btn" onclick="alert('Search feature coming soon!')" aria-label="Search">🔍</button>
       <button class="nav-icon-btn" id="menu-btn" aria-label="Open menu">☰</button>
     </div>
   </nav>
@@ -120,7 +120,7 @@
       <span>🍪</span>
       <span class="btn-label">Browse</span>
     </button>
-    <button class="bottom-nav-center" id="bnav-heart" aria-label="My matches">❤️</button>
+    <button class="bottom-nav-center" id="bnav-heart" onclick="location.href='my-cookies.html'" aria-label="My favorites">❤️</button>
     <button class="bottom-nav-btn" onclick="location.href='order.html'">
       <span>📦</span>
       <span class="btn-label">Orders</span>
@@ -184,12 +184,10 @@
     });
 
     document.getElementById('bnav-heart').addEventListener('click', () => {
-      location.href = personality ? 'result.html' : 'quiz.html';
+      location.href = 'my-cookies.html';
     });
   </script>
 
-
-
-
+  <script src="js/crumbsy.js"></script>
 </body>
 </html>

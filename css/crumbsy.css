@@ -1,0 +1,222 @@
+/* Crumbsy Chatbot Styles */
+:root {
+  --crumbsy-primary: #3B1A17;
+  --crumbsy-accent: #E8807A;
+  --crumbsy-bg: rgba(255, 255, 255, 0.85);
+  --crumbsy-glass: rgba(255, 255, 255, 0.7);
+}
+
+.crumbsy-widget {
+  position: fixed;
+  bottom: 85px; /* Above bottom nav */
+  right: 20px;
+  z-index: 1000;
+  font-family: 'Outfit', sans-serif;
+}
+
+.crumbsy-button {
+  width: 60px;
+  height: 60px;
+  background-color: var(--crumbsy-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 3px solid white;
+}
+
+.crumbsy-button:hover {
+  transform: scale(1.1) rotate(10deg);
+}
+
+.crumbsy-button .badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: var(--crumbsy-accent);
+  color: white;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.crumbsy-window {
+  position: absolute;
+  bottom: 80px;
+  right: 0;
+  width: 320px;
+  height: 450px;
+  background: var(--crumbsy-bg);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  display: none; /* Initially hidden */
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transform-origin: bottom right;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.crumbsy-window.open {
+  display: flex;
+  animation: crumbsyPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes crumbsyPop {
+  from { transform: scale(0.5) translateY(50px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.crumbsy-header {
+  background: var(--crumbsy-primary);
+  color: white;
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.crumbsy-header-avatar {
+  background: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.crumbsy-header-info h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.crumbsy-header-info p {
+  margin: 0;
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.crumbsy-close {
+  margin-left: auto;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.crumbsy-close:hover { opacity: 1; }
+
+.crumbsy-messages {
+  flex: 1;
+  padding: 1.25rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  scrollbar-width: none;
+}
+
+.crumbsy-messages::-webkit-scrollbar { display: none; }
+
+.msg {
+  padding: 10px 14px;
+  border-radius: 18px;
+  font-size: 0.88rem;
+  max-width: 85%;
+  line-height: 1.4;
+}
+
+.msg.bot {
+  background: white;
+  color: var(--crumbsy-primary);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.msg.user {
+  background: var(--crumbsy-accent);
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+  box-shadow: 0 2px 5px rgba(232, 128, 122, 0.2);
+}
+
+.crumbsy-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.crumbsy-opt-btn {
+  background: white;
+  border: 1px solid var(--crumbsy-accent);
+  color: var(--crumbsy-accent);
+  padding: 6px 12px;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.crumbsy-opt-btn:hover {
+  background: var(--crumbsy-accent);
+  color: white;
+}
+
+.crumbsy-input {
+  padding: 15px;
+  background: white;
+  display: flex;
+  gap: 10px;
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.crumbsy-input input {
+  flex: 1;
+  border: none;
+  background: #f5f5f5;
+  padding: 10px 15px;
+  border-radius: 50px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  outline: none;
+}
+
+.crumbsy-send {
+  background: var(--crumbsy-primary);
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+}
+
+.typing {
+  font-style: italic;
+  font-size: 0.75rem;
+  color: var(--color-text-mid);
+  margin-bottom: 5px;
+}

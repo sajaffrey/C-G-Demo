@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Cookies — Crumbs & Giggles</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/new-screens.css">
+</head>
+<body style="background-color: #FAF6F5;">
+
+  <div class="screen-container">
+    <header class="header-minimal">
+      <button class="back-btn-circle" onclick="location.href='index.html'">🏠</button>
+      <h1 class="header-title-main">My Favorites</h1>
+      <button class="back-btn-circle" onclick="location.href='build.html'">➕</button>
+    </header>
+
+    <!-- Filter Bar (Minimal) -->
+    <div style="display: flex; gap: 0.75rem; margin-bottom: 2rem; overflow-x: auto; scrollbar-width: none;">
+      <button class="discovery-filter-btn active" style="padding: 0.5rem 1.25rem;">Saved (4)</button>
+      <button class="discovery-filter-btn" style="padding: 0.5rem 1.25rem;">Custom (1)</button>
+      <button class="discovery-filter-btn" style="padding: 0.5rem 1.25rem;">Recents</button>
+    </div>
+
+    <!-- Cookie Grid -->
+    <div class="cookie-grid" id="cookie-grid">
+      
+      <!-- Cookie 1 -->
+      <div class="cookie-card" data-cat="saved recents" onclick="viewDetail('Triple Chocolate', 'assets/images/Chocolate-Chip-Cookies.jpg', '2.99')">
+        <div class="cookie-card-media" style="background: #FFF0EF;">
+          <img src="assets/images/Chocolate-Chip-Cookies.jpg" alt="Cookie">
+          <div class="fav-heart">❤️</div>
+        </div>
+        <div class="cookie-card-info">
+          <div class="cookie-card-name">Triple Chocolate</div>
+          <div class="cookie-card-meta">
+            <span class="cookie-card-type">Classic</span>
+            <span class="cookie-card-price">$2.99</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cookie 2 -->
+      <div class="cookie-card" data-cat="saved" onclick="viewDetail('Matcha White Choc', 'assets/images/matcha_white_choc_cookie.png', '3.29')">
+        <div class="cookie-card-media" style="background: #fdf2f1;">
+          <img src="assets/images/matcha_white_choc_cookie.png" alt="Cookie">
+          <div class="fav-heart">❤️</div>
+        </div>
+        <div class="cookie-card-info">
+          <div class="cookie-card-name">Matcha White Choc</div>
+          <div class="cookie-card-meta">
+            <span class="cookie-card-type">Unique</span>
+            <span class="cookie-card-price">$3.29</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cookie 3 -->
+      <div class="cookie-card" data-cat="saved recents" onclick="viewDetail('Salted Caramel Dream', 'assets/images/salted_caramel_pretzel_cookie.png', '3.49')">
+        <div class="cookie-card-media" style="background: #FAFDFB;">
+          <img src="assets/images/salted_caramel_pretzel_cookie.png" alt="Cookie">
+          <div class="fav-heart">❤️</div>
+        </div>
+        <div class="cookie-card-info">
+          <div class="cookie-card-name">Salted Caramel Dream</div>
+          <div class="cookie-card-meta">
+            <span class="cookie-card-type">Bestseller</span>
+            <span class="cookie-card-price">$3.49</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cookie 4 -->
+      <div class="cookie-card" data-cat="saved" onclick="viewDetail('Classic Sugar Pack', 'assets/images/sugar_cookie_pack.png', '12.99')">
+        <div class="cookie-card-media" style="background: #FFF9F0;">
+          <img src="assets/images/sugar_cookie_pack.png" alt="Cookie">
+          <div class="fav-heart">❤️</div>
+        </div>
+        <div class="cookie-card-info">
+          <div class="cookie-card-name">Classic Sugar Pack</div>
+          <div class="cookie-card-meta">
+            <span class="cookie-card-type">Multipack</span>
+            <span class="cookie-card-price">$12.99</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Custom Cookie (Hidden by default unless exists) -->
+      <div class="cookie-card" id="my-custom-cookie" data-cat="custom recents" onclick="viewDetail('My Custom Masterpiece', 'assets/images/matcha_white_choc_cookie.png', '3.50')" style="display: none; border: 2.5px dashed #E8807A;">
+        <div class="cookie-card-media" style="background: white;">
+          <img src="assets/images/matcha_white_choc_cookie.png" alt="Cookie">
+          <div class="fav-heart">❤️</div>
+        </div>
+        <div class="cookie-card-info">
+          <div class="cookie-card-name">My Custom Cookie</div>
+          <div class="cookie-card-meta">
+            <span class="cookie-card-type">Custom</span>
+            <span class="cookie-card-price">$3.50</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA Area -->
+    <div style="margin-top: 3rem; text-align: center; background: #FFF0EF; border-radius: 24px; padding: 2rem;">
+      <h3 style="font-family: 'Playfair Display', serif; color: var(--color-primary); margin-bottom: 0.5rem;">Crave Something New?</h3>
+      <p style="font-size: 0.85rem; color: #8C6B65; margin-bottom: 1.5rem;">Build your own custom cookie from scratch!</p>
+      <button class="checkout-btn" onclick="location.href='build.html'">Start Building 🍪</button>
+    </div>
+
+  </div>
+
+  <!-- Bottom Nav -->
+  <nav class="bottom-nav">
+    <button class="bottom-nav-btn" onclick="location.href='index.html'">🏠<span class="btn-label">Home</span></button>
+    <button class="bottom-nav-btn" onclick="location.href='discovery.html'">🍪<span class="btn-label">Browse</span></button>
+    <button class="bottom-nav-center active" onclick="location.href='my-cookies.html'">❤️</button>
+    <button class="bottom-nav-btn" onclick="location.href='order.html'">📦<span class="btn-label">Orders</span></button>
+    <button class="bottom-nav-btn" onclick="location.href='profile.html'">👤<span class="btn-label">Profile</span></button>
+  </nav>
+
+  <script>
+    // Filtering Logic
+    const filterButtons = document.querySelectorAll('.discovery-filter-btn');
+    const cards = document.querySelectorAll('.cookie-card');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Update active state
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.innerText.toLowerCase().split(' ')[0]; // get 'saved', 'custom', or 'recents'
+        
+        cards.forEach(card => {
+          const cats = card.getAttribute('data-cat') || '';
+          if (cats.includes(filter)) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Check for custom cookie
+    const custom = localStorage.getItem('lastCustomCookie');
+    if (custom) {
+      document.getElementById('my-custom-cookie').style.display = 'block';
+    }
+
+    function viewDetail(name, img, price) {
+      const product = { name, img, price, location: 'C&G Kitchen' };
+      localStorage.setItem('selectedProduct', JSON.stringify(product));
+      window.location.href = 'product-detail.html';
+    }
+  </script>
+
+</body>
+</html>
