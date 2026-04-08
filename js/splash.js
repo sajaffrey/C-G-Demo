@@ -1,31 +1,42 @@
 /**
  * Splash Screen Logic
- * Transitions from Blank -> With Logo -> index.html
+ * Transitions from Blank -> With Logo -> (Redirect or Hide)
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+function runSplashScreen(targetUrl = null) {
+    const splashContainer = document.getElementById('splash-container');
+    const splashWithLogo = document.getElementById('splash-with-logo');
+    const splashBlank = document.getElementById('splash-blank');
+
+    if (!splashContainer) return;
+
     // Initial delay for the "Blank" screen
-    // It's already showing the blank screen by default (as per CSS .active classes)
-    
     setTimeout(() => {
         // Show the screen with logo
-        const splashWithLogo = document.getElementById('splash-with-logo');
         if (splashWithLogo) {
             splashWithLogo.classList.add('active');
         }
-        
-        // Optionally, we can remove the blank screen, but since the logo one is absolute, it will layer over nicely
-        // Let's just keep it for consistency or fade it out if needed.
     }, 600); // 600ms of blank screen before logo starts animating in
     
-    // Final redirect to index.html after the logo has been shown long enough
+    // Final action: redirect or hide after the logo has been shown long enough
     setTimeout(() => {
-        // Add a fade out to the entire body for a smooth transition to the next page
-        document.body.style.transition = 'opacity 0.8s ease';
-        document.body.style.opacity = '0';
+        // Add a fade out to the container
+        splashContainer.classList.add('fade-out');
         
         setTimeout(() => {
-            window.location.href = 'index.html';
-        }, 800);
-    }, 4200); // Total splash time approx 4.2 seconds
-});
+            if (targetUrl) {
+                window.location.href = targetUrl;
+            } else {
+                // If no redirect, set the container to display none to remove it from layout
+                splashContainer.style.display = 'none';
+                document.body.classList.remove('splash-body');
+                document.body.style.overflow = '';
+            }
+        }, 800); // Offset with the fade-out duration
+    }, 4000); // Total splash time approx 4 seconds
+}
+
+// Auto-run if we are on the splash.html page
+if (window.location.pathname.includes('splash.html')) {
+    document.addEventListener('DOMContentLoaded', () => runSplashScreen('index.html'));
+}

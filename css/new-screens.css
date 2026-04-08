@@ -4,13 +4,22 @@
   --color-accent: #E8807A;
   --color-accent-light: #FFF0EF;
   --color-accent-dark: #6b3128;
+  
+  /* Inherit/Match main style system */
+  --transition-base: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --shadow-subtle:   0 4px 15px rgba(86, 38, 34, 0.05);
+  --shadow-elevated: 0 8px 25px rgba(86, 38, 34, 0.12);
+}
+
+.screen-container * {
+  transition: var(--transition-base);
 }
 
 /* Base Layout Utilities */
 .screen-container {
-  max-width: 480px;
+  max-width: 520px; /* Slight increase in max-width for better desktop presence */
   margin: 0 auto;
-  padding: 1.5rem 1rem 6rem;
+  padding: 1.5rem 2rem 6rem; /* Increased horizontal padding */
   animation: fadeIn 0.4s ease-out;
 }
 
@@ -24,7 +33,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2.5rem; /* More breathing room after header */
 }
 .back-btn-circle {
   width: 40px;
@@ -39,6 +48,15 @@
   color: var(--color-primary);
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   cursor: pointer;
+}
+.back-btn-circle:hover {
+  background: var(--color-accent-light);
+  transform: translateX(-3px);
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-subtle);
+}
+.back-btn-circle:active {
+  transform: scale(0.92) translateX(-3px);
 }
 .header-title-main {
   font-family: 'Playfair Display', serif;
@@ -98,8 +116,12 @@
   position: relative;
 }
 .option-card-new:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(86, 38, 34, 0.08);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-elevated);
+  border-color: var(--color-accent);
+}
+.option-card-new:active {
+  transform: scale(0.98) translateY(-2px);
 }
 .option-card-new.selected {
   border-color: var(--color-accent);
@@ -205,6 +227,14 @@
   justify-content: center;
   gap: 0.5rem;
 }
+.next-step-btn:hover {
+  background: var(--color-accent);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-elevated);
+}
+.next-step-btn:active {
+  transform: scale(0.96);
+}
 
 /* Product Detail Specifics */
 .product-hero-slider {
@@ -306,6 +336,14 @@
   border-radius: 16px;
   cursor: pointer;
 }
+.nutrition-summary-row:hover {
+  background: var(--color-accent-light);
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+}
+.nutrition-summary-row:active {
+  transform: scale(0.98);
+}
 
 /* Nutrition Detailed Table */
 .nutrition-table {
@@ -361,8 +399,11 @@
   flex-direction: column;
 }
 .cookie-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(86, 38, 34, 0.12);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-elevated);
+}
+.cookie-card:active {
+  transform: scale(0.97) translateY(-3px);
 }
 .cookie-card-media {
   height: 140px;

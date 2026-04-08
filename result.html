@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Crumbs &amp; Giggles — Your Cookie Match</title>
   <link rel="stylesheet" href="css/style.css">
-
-
+  <link rel="stylesheet" href="css/new-screens.css">
 </head>
 <body>
 
@@ -21,26 +20,27 @@
     </div>
     <ul class="drawer-nav">
       <li onclick="location.href='index.html'">
-        <div class="drawer-nav-left"><span class="drawer-nav-icon">🏠</span><span class="drawer-nav-label">Home</span></div>
+        <div class="drawer-nav-left"><span class="drawer-nav-icon"><img src="assets/Icons For App/Home_navbar.png" alt="Home"></span><span class="drawer-nav-label">Home</span></div>
         <span class="drawer-nav-arrow">›</span>
       </li>
       <li onclick="location.href='quiz.html'">
-        <div class="drawer-nav-left"><span class="drawer-nav-icon">🎯</span><span class="drawer-nav-label">Cookie Quiz</span></div>
+        <div class="drawer-nav-left"><span class="drawer-nav-icon"><img src="assets/Icons For App/2_quiz3.png" alt="Quiz"></span><span class="drawer-nav-label">Cookie Quiz</span></div>
         <span class="drawer-nav-arrow">›</span>
       </li>
       <li onclick="location.href='customize.html'">
-        <div class="drawer-nav-left"><span class="drawer-nav-icon">🍪</span><span class="drawer-nav-label">Customize</span></div>
+        <div class="drawer-nav-left"><span class="drawer-nav-icon"><img src="assets/Icons For App/Cookie_landing screen.png" alt="Customize"></span><span class="drawer-nav-label">Customize</span></div>
         <span class="drawer-nav-arrow">›</span>
       </li>
       <li onclick="location.href='order.html'">
-        <div class="drawer-nav-left"><span class="drawer-nav-icon">📦</span><span class="drawer-nav-label">My Orders</span></div>
+        <div class="drawer-nav-left"><span class="drawer-nav-icon"><img src="assets/Icons For App/Add to cart_Navbar.png" alt="Orders"></span><span class="drawer-nav-label">My Orders</span></div>
         <span class="drawer-nav-arrow">›</span>
       </li>
       <li onclick="location.href='profile.html'">
-        <div class="drawer-nav-left"><span class="drawer-nav-icon">👤</span><span class="drawer-nav-label">Profile</span></div>
+        <div class="drawer-nav-left"><span class="drawer-nav-icon"><img src="assets/Icons For App/Profile_Navbar.png" alt="Profile"></span><span class="drawer-nav-label">Profile</span></div>
         <span class="drawer-nav-arrow">›</span>
       </li>
     </ul>
+
   </aside>
 
   <!-- Navbar -->
@@ -50,7 +50,7 @@
       <span class="nav-logo-text">crumbs &amp; giggles</span>
     </a>
     <div class="nav-actions">
-      <button class="nav-icon-btn" onclick="location.href='quiz.html'" title="Retake quiz" aria-label="Retake quiz">🔄</button>
+      <button class="nav-icon-btn" onclick="location.href='quiz.html'" title="Retake quiz" aria-label="Retake quiz"><img src="assets/Icons For App/restart icon.svg" alt="Retake Quiz" style="width: 24px; height: 24px;"></button>
       <button class="nav-icon-btn" id="menu-btn" aria-label="Open menu">☰</button>
     </div>
   </nav>
@@ -101,19 +101,24 @@
   <!-- Bottom Nav -->
   <nav class="bottom-nav" aria-label="Bottom navigation">
     <button class="bottom-nav-btn" onclick="location.href='index.html'">
-      <span>🏠</span><span class="btn-label">Home</span>
+      <img src="assets/Icons For App/Home_navbar.png" alt="Home">
+      <span class="btn-label">Home</span>
     </button>
     <button class="bottom-nav-btn" onclick="location.href='discovery.html'">
-      <span>🍪</span><span class="btn-label">Browse</span>
+      <img src="assets/Icons For App/Wishlist_Navbar.png" alt="Browse">
+      <span class="btn-label">Browse</span>
     </button>
-    <button class="bottom-nav-center active" onclick="location.href='my-cookies.html'">❤️</button>
+    <button class="bottom-nav-center" id="bnav-heart" onclick="location.href='my-cookies.html'" aria-label="My favorites"><img src="assets/Icons For App/heart icon.png" alt="Wishlist"></button>
     <button class="bottom-nav-btn" onclick="location.href='order.html'">
-      <span>📦</span><span class="btn-label">Orders</span>
+      <img src="assets/Icons For App/cart icon.png" alt="Cart">
+      <span class="btn-label">Cart</span>
     </button>
     <button class="bottom-nav-btn" onclick="location.href='profile.html'">
-      <span>👤</span><span class="btn-label">Profile</span>
+      <img src="assets/Icons For App/Profile_Navbar.png" alt="Profile">
+      <span class="btn-label">Profile</span>
     </button>
   </nav>
+
 
   <script>
     // Side menu
@@ -190,9 +195,9 @@
         img: 'assets/images/Chocolate-Chip-Cookies.jpg',
         allergens: 'Contains: Gluten, Dairy, Eggs',
         why: [
-          'Nutty brown butter elevates this cookie to an art form',
-          'Complex, sophisticated flavours for someone who does not settle',
-          'The cookie everyone will be talking about — but you already knew'
+          'Nutty brown butter elevates this cookie to an art form.',
+          'Complex, sophisticated flavours for someone who does not settle.',
+          'The cookie everyone will be talking about but you already knew.'
         ]
       },
       purist: {
@@ -234,15 +239,34 @@
 
     // Share button
     document.getElementById('share-btn').addEventListener('click', () => {
-      const text = 'I\'m a ' + data.name + ' My perfect cookie match is the ' + data.cookie + '! 🍪 Find yours at Crumbs & Giggles.';
+      const personalityTitle = document.getElementById('personality-name').textContent;
+      const matchName = document.getElementById('cookie-name').textContent;
+      const shareText = `I'm a ${personalityTitle}! My perfect cookie match is ${matchName}! 🍪 Find yours at Crumbs & Giggles.`;
+      const shareUrl = window.location.origin + window.location.pathname.replace('result.html', 'index.html');
+
       if (navigator.share) {
-        navigator.share({ title: 'My Cookie Match', text });
+        navigator.share({
+          title: 'My Cookie Match — Crumbs & Giggles',
+          text: shareText,
+          url: shareUrl
+        }).catch(err => {
+          console.log('Share failed:', err);
+        });
       } else {
-        navigator.clipboard.writeText(text).then(() => {
+        // Fallback to clipboard
+        const fullText = `${shareText} ${shareUrl}`;
+        navigator.clipboard.writeText(fullText).then(() => {
           const btn = document.getElementById('share-btn');
-          const orig = btn.textContent;
-          btn.textContent = '✅ Copied to clipboard!';
-          setTimeout(() => { btn.textContent = orig; }, 2000);
+          const originalContent = btn.innerHTML;
+          btn.innerHTML = '✅ Copied to clipboard!';
+          btn.style.borderColor = '#2e7d32';
+          btn.style.color = '#2e7d32';
+          
+          setTimeout(() => {
+            btn.innerHTML = originalContent;
+            btn.style.borderColor = '';
+            btn.style.color = '';
+          }, 2500);
         });
       }
     });

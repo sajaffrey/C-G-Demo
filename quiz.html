@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Crumbs &amp; Giggles — Cookie Quiz</title>
   <link rel="stylesheet" href="css/style.css">
-
-
+  <link rel="stylesheet" href="css/new-screens.css">
 </head>
 <body>
 
@@ -21,25 +20,30 @@
     </div>
     <ul class="drawer-nav">
       <li onclick="location.href='index.html'">
-        <div class="drawer-nav-left"><span class="drawer-nav-icon">🏠</span><span class="drawer-nav-label">Home</span></div>
+        <div class="drawer-nav-left"><span class="drawer-nav-icon"><img src="assets/Icons For App/Home_navbar.png" alt="Home"></span><span class="drawer-nav-label">Home</span></div>
         <span class="drawer-nav-arrow">›</span>
       </li>
+
       <li onclick="location.href='quiz.html'">
-        <div class="drawer-nav-left"><span class="drawer-nav-icon">🎯</span><span class="drawer-nav-label">Cookie Quiz</span></div>
+        <div class="drawer-nav-left"><span class="drawer-nav-icon"><img src="assets/Icons For App/2_quiz3.png" alt="Quiz"></span><span class="drawer-nav-label">Cookie Quiz</span></div>
         <span class="drawer-nav-arrow">›</span>
       </li>
+
       <li onclick="location.href='customize.html'">
-        <div class="drawer-nav-left"><span class="drawer-nav-icon">🍪</span><span class="drawer-nav-label">Customize</span></div>
+        <div class="drawer-nav-left"><span class="drawer-nav-icon"><img src="assets/Icons For App/Cookie_landing screen.png" alt="Customize"></span><span class="drawer-nav-label">Customize</span></div>
         <span class="drawer-nav-arrow">›</span>
       </li>
+
       <li onclick="location.href='order.html'">
-        <div class="drawer-nav-left"><span class="drawer-nav-icon">📦</span><span class="drawer-nav-label">My Orders</span></div>
+        <div class="drawer-nav-left"><span class="drawer-nav-icon"><img src="assets/Icons For App/Add to cart_Navbar.png" alt="Orders"></span><span class="drawer-nav-label">My Orders</span></div>
         <span class="drawer-nav-arrow">›</span>
       </li>
+
       <li onclick="location.href='profile.html'">
-        <div class="drawer-nav-left"><span class="drawer-nav-icon">👤</span><span class="drawer-nav-label">Profile</span></div>
+        <div class="drawer-nav-left"><span class="drawer-nav-icon"><img src="assets/Icons For App/Profile_Navbar.png" alt="Profile"></span><span class="drawer-nav-label">Profile</span></div>
         <span class="drawer-nav-arrow">›</span>
       </li>
+
     </ul>
   </aside>
 
@@ -58,7 +62,6 @@
   <main class="quiz-page">
 
     <div class="quiz-header">
-      <button class="quiz-back-btn" id="back-btn">←</button>
       <span class="question-counter" id="question-counter">Question 1 of 5</span>
       <button class="quiz-skip-btn" id="skip-btn">Skip</button>
     </div>
@@ -69,61 +72,76 @@
 
     <!-- Question 1 -->
     <div class="question-block active" id="question-1">
-      <span class="question-emoji">☀️</span>
+      <span class="question-emoji"><img src="assets/Icons For App/Sun_quiz1.svg" alt="Morning" style="width: 80px; height: 80px; margin: 0 auto; display: block;"></span>
+
       <h2 class="question-text">It's Saturday morning. What's your vibe?</h2>
+
       <div class="answer-grid">
-        <div class="answer-card" data-value="adventure"><span class="answer-emoji">🏃</span> Early rise &amp; adventure!</div>
-        <div class="answer-card" data-value="cozy"><span class="answer-emoji">📚</span> Cozy in bed with a book</div>
-        <div class="answer-card" data-value="social"><span class="answer-emoji">🥞</span> Brunch with friends</div>
-        <div class="answer-card" data-value="creative"><span class="answer-emoji">👨🍳</span> Baking something new</div>
+        <div class="answer-card" data-value="adventure"><img src="assets/Icons For App/1_quiz1.svg" alt="" class="answer-emoji-img" style="width:36px; height:36px; margin-right:10px;"> Early rise &amp; adventure!</div>
+        <div class="answer-card" data-value="cozy"><img src="assets/Icons For App/2_quiz1.svg" alt="" class="answer-emoji-img" style="width:36px; height:36px; margin-right:10px;"> Cozy in bed with a book</div>
+        <div class="answer-card" data-value="social"><img src="assets/Icons For App/3_quiz1.svg" alt="" class="answer-emoji-img" style="width:36px; height:36px; margin-right:10px;"> Brunch with friends</div>
+        <div class="answer-card" data-value="creative"><img src="assets/Icons For App/4_quiz1.svg" alt="" class="answer-emoji-img" style="width:36px; height:36px; margin-right:10px;"> Baking something new</div>
+
       </div>
     </div>
 
     <!-- Question 2 -->
     <div class="question-block" id="question-2">
-      <span class="question-emoji">✨</span>
+      <span class="question-emoji"><img src="assets/Icons For App/balloons_quiz2.svg" alt="Flavor" style="width: 80px; height: 80px; margin: 0 auto; display: block;"></span>
+
       <h2 class="question-text">Pick your ideal flavor combo</h2>
+
       <div class="answer-grid">
-        <div class="answer-card" data-value="sweet-salty"><span class="answer-emoji">🧂</span> Sweet &amp; salty</div>
-        <div class="answer-card" data-value="chocolatey"><span class="answer-emoji">🍫</span> Rich &amp; chocolatey</div>
-        <div class="answer-card" data-value="classic"><span class="answer-emoji">🥛</span> Classic &amp; comforting</div>
-        <div class="answer-card" data-value="unique"><span class="answer-emoji">🌟</span> Unique &amp; surprising</div>
+        <div class="answer-card" data-value="sweet-salty"><img src="assets/Icons For App/1_quiz2.svg" alt="" class="answer-emoji-img" style="width:36px; height:36px; margin-right:10px;"> Sweet &amp; salty</div>
+        <div class="answer-card" data-value="chocolatey"><img src="assets/Icons For App/2_quiz2.svg" alt="" class="answer-emoji-img" style="width:36px; height:36px; margin-right:10px;"> Rich &amp; chocolatey</div>
+        <div class="answer-card" data-value="classic"><img src="assets/Icons For App/3_quiz2.svg" alt="" class="answer-emoji-img" style="width:36px; height:36px; margin-right:10px;"> Classic &amp; comforting</div>
+        <div class="answer-card" data-value="unique"><img src="assets/Icons For App/4_quiz2.svg" alt="" class="answer-emoji-img" style="width:36px; height:36px; margin-right:10px;"> Unique &amp; surprising</div>
+
       </div>
     </div>
 
     <!-- Question 3 -->
     <div class="question-block" id="question-3">
-      <span class="question-emoji">🤔</span>
+      <span class="question-emoji"><img src="assets/Icons For App/cloud_quiz3.svg" alt="Texture" style="width: 80px; height: 80px; margin: 0 auto; display: block;"></span>
+
       <h2 class="question-text">Your perfect cookie texture?</h2>
+
       <div class="answer-grid">
-        <div class="answer-card" data-value="chewy"><span class="answer-emoji">☁️</span> Soft &amp; chewy</div>
-        <div class="answer-card" data-value="crunchy"><span class="answer-emoji">⚡</span> Crispy &amp; crunchy</div>
-        <div class="answer-card" data-value="gooey"><span class="answer-emoji">🌙</span> Gooey center</div>
-        <div class="answer-card" data-value="balanced"><span class="answer-emoji">⚖️</span> Perfectly balanced</div>
+        <div class="answer-card" data-value="chewy"><img src="assets/Icons For App/1_quiz3.svg" alt="" class="answer-emoji-img" style="width:36px; height:36px; margin-right:10px;"> Soft &amp; chewy</div>
+        <div class="answer-card" data-value="crunchy"><img src="assets/Icons For App/2_quiz3.svg" alt="" class="answer-emoji-img" style="width:36px; height:36px; margin-right:10px;"> Crispy &amp; crunchy</div>
+        <div class="answer-card" data-value="gooey"><img src="assets/Icons For App/3_quiz3.svg" alt="" class="answer-emoji-img" style="width:36px; height:36px; margin-right:10px;"> Gooey center</div>
+        <div class="answer-card" data-value="balanced"><img src="assets/Icons For App/4_quiz3.svg" alt="" class="answer-emoji-img" style="width:36px; height:36px; margin-right:10px;"> Perfectly balanced</div>
+
       </div>
     </div>
 
     <!-- Question 4 -->
     <div class="question-block" id="question-4">
-      <span class="question-emoji">🎉</span>
+      <span class="question-emoji"><img src="assets/Icons For App/celebrate_quiz4.svg" alt="Celebrate" style="width: 80px; height: 80px; margin: 0 auto; display: block;"></span>
+
       <h2 class="question-text">How do you like to celebrate?</h2>
+
       <div class="answer-grid">
-        <div class="answer-card" data-value="party"><span class="answer-emoji">🎈</span> Big party with everyone</div>
-        <div class="answer-card" data-value="intimate"><span class="answer-emoji">🕯️</span> Intimate dinner</div>
-        <div class="answer-card" data-value="spontaneous"><span class="answer-emoji">🎪</span> Spontaneous adventure</div>
-        <div class="answer-card" data-value="solo"><span class="answer-emoji">💝</span> Treat myself</div>
+        <div class="answer-card" data-value="party"><img src="assets/Icons For App/1_quiz4.svg" alt="" class="answer-emoji-img" style="width:36px; height:36px; margin-right:10px;"> Big party with everyone</div>
+        <div class="answer-card" data-value="intimate"><img src="assets/Icons For App/2_quiz4.svg" alt="" class="answer-emoji-img" style="width:36px; height:36px; margin-right:10px;"> Intimate dinner</div>
+        <div class="answer-card" data-value="spontaneous"><img src="assets/Icons For App/3_quiz4.svg" alt="" class="answer-emoji-img" style="width:36px; height:36px; margin-right:10px;"> Spontaneous adventure</div>
+        <div class="answer-card" data-value="solo"><img src="assets/Icons For App/4_quiz4.svg" alt="" class="answer-emoji-img" style="width:36px; height:36px; margin-right:10px;"> Treat myself</div>
+
       </div>
     </div>
 
     <!-- Question 5 -->
     <div class="question-block" id="question-5">
-      <span class="question-emoji">☕</span>
+      <span class="question-emoji"><img src="assets/Icons For App/beverage_quiz5.svg" alt="Beverage" style="width: 80px; height: 80px; margin: 0 auto; display: block;"></span>
+
       <h2 class="question-text">Your go-to beverage?</h2>
+
       <div class="answer-grid">
-        <div class="answer-card" data-value="coffee"><span class="answer-emoji">☕</span> Classic coffee</div>
-        <div class="answer-card" data-value="juice"><span class="answer-emoji">🍊</span> Orange Juice</div>
-        <div class="answer-card" data-value="milk"><span class="answer-emoji">🥛</span> Cold milk</div>
-        <div class="answer-card" data-value="bubbletea"><span class="answer-emoji">🧋</span> Bubble tea</div>
+        <div class="answer-card" data-value="coffee"><img src="assets/Icons For App/1_quiz5.svg" alt="" class="answer-emoji-img" style="width:36px; height:36px; margin-right:10px;"> Classic coffee</div>
+        <div class="answer-card" data-value="juice"><img src="assets/Icons For App/2_quiz5.svg" alt="" class="answer-emoji-img" style="width:36px; height:36px; margin-right:10px;"> Orange Juice</div>
+        <div class="answer-card" data-value="milk"><img src="assets/Icons For App/3_quiz5.svg" alt="" class="answer-emoji-img" style="width:36px; height:36px; margin-right:10px;"> Cold milk</div>
+        <div class="answer-card" data-value="bubbletea"><img src="assets/Icons For App/4_quiz5.svg" alt="" class="answer-emoji-img" style="width:36px; height:36px; margin-right:10px;"> Bubble tea</div>
+
       </div>
     </div>
 
@@ -134,19 +152,24 @@
   <!-- Bottom Nav -->
   <nav class="bottom-nav" aria-label="Bottom navigation">
     <button class="bottom-nav-btn" onclick="location.href='index.html'">
-      <span>🏠</span><span class="btn-label">Home</span>
+      <img src="assets/Icons For App/Home_navbar.png" alt="Home">
+      <span class="btn-label">Home</span>
     </button>
     <button class="bottom-nav-btn" onclick="location.href='discovery.html'">
-      <span>🍪</span><span class="btn-label">Browse</span>
+      <img src="assets/Icons For App/Wishlist_Navbar.png" alt="Browse">
+      <span class="btn-label">Browse</span>
     </button>
-    <button class="bottom-nav-center active" onclick="location.href='my-cookies.html'">❤️</button>
+    <button class="bottom-nav-center" id="bnav-heart" onclick="location.href='my-cookies.html'" aria-label="My favorites"><img src="assets/Icons For App/heart icon.png" alt="Wishlist"></button>
     <button class="bottom-nav-btn" onclick="location.href='order.html'">
-      <span>📦</span><span class="btn-label">Orders</span>
+      <img src="assets/Icons For App/cart icon.png" alt="Cart">
+      <span class="btn-label">Cart</span>
     </button>
     <button class="bottom-nav-btn" onclick="location.href='profile.html'">
-      <span>👤</span><span class="btn-label">Profile</span>
+      <img src="assets/Icons For App/Profile_Navbar.png" alt="Profile">
+      <span class="btn-label">Profile</span>
     </button>
   </nav>
+
 
   <script src="js/script.js"></script>
   <script>
@@ -221,9 +244,7 @@
       });
     });
 
-    document.getElementById('back-btn').addEventListener('click', () => {
-      if (currentQuestion > 1) { currentQuestion--; showQuestion(currentQuestion); }
-    });
+
 
     document.getElementById('skip-btn').addEventListener('click', () => {
       if (currentQuestion < 5) { currentQuestion++; showQuestion(currentQuestion); }

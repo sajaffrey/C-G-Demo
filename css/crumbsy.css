@@ -30,7 +30,11 @@
 }
 
 .crumbsy-button:hover {
-  transform: scale(1.1) rotate(10deg);
+  transform: scale(1.1) translateY(-5px) rotate(5deg);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+.crumbsy-button:active {
+  transform: scale(0.92);
 }
 
 .crumbsy-button .badge {
@@ -180,6 +184,11 @@
 .crumbsy-opt-btn:hover {
   background: var(--crumbsy-accent);
   color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(232, 128, 122, 0.25);
+}
+.crumbsy-opt-btn:active {
+  transform: scale(0.95);
 }
 
 .crumbsy-input {
@@ -212,6 +221,15 @@
   justify-content: center;
   cursor: pointer;
   border: none;
+  transition: all 0.2s;
+}
+
+.crumbsy-send:hover {
+  background: var(--crumbsy-accent);
+  transform: scale(1.1);
+}
+.crumbsy-send:active {
+  transform: scale(0.9);
 }
 
 .typing {
